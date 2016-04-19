@@ -3,6 +3,7 @@ package pl.kot.app1;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.PasswordTransformationMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         btnZalogujSie = (Button) findViewById(R.id.btnZalogujSie);
         editTextLogin = (EditText) findViewById(R.id.textEditLogin);
         editTextPass = (EditText) findViewById(R.id.editTextPassword);
+        editTextPass.setTransformationMethod(new PasswordTransformationMethod());
         textViewBlednyLoginLubHaslo = (TextView) findViewById(R.id.textViewBlednyLoginLubHaaslo);
         btnZalogujSie.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +46,8 @@ public class LoginActivity extends AppCompatActivity {
 
         if (zamokujUdaneLogowanie(login, pass)) {
             textViewBlednyLoginLubHaslo.setText(null);
+            editTextLogin.setText(null);
+            editTextPass.setText(null);
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else {

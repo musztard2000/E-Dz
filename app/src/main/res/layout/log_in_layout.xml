@@ -41,7 +41,8 @@
             android:maxWidth="300dp"
             android:layout_alignStart="@+id/textEditLogin"
             android:layout_alignEnd="@+id/textEditLogin"
-            android:nestedScrollingEnabled="false" />
+            android:nestedScrollingEnabled="false"
+            android:password="false" />
 
         <Button
             android:layout_width="wrap_content"
