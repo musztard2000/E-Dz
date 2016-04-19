@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Logowanie"
+            android:id="@+id/zalogujTextView"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="41dp"
+            android:textAlignment="center"
+            android:textSize="40dp" />
+
+        android:layout_marginLeft="20dp"
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textEditLogin"
+            android:hint="Nazwa Użytkownika"
+            android:layout_marginTop="40dp"
+            android:minWidth="300dp"
+            android:maxWidth="300dp"
+            android:layout_below="@+id/zalogujTextView"
+            android:layout_centerHorizontal="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextPassword"
+            android:hint="Hasło"
+            android:layout_centerVertical="true"
+            android:minWidth="300dp"
+            android:maxWidth="300dp"
+            android:layout_alignStart="@+id/textEditLogin"
+            android:layout_alignEnd="@+id/textEditLogin"
+            android:nestedScrollingEnabled="false" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Zaloguj"
+            android:id="@+id/btnZalogujSie"
+            android:layout_marginBottom="63dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:minWidth="200dp"
+            android:maxWidth="200dp"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/abc_primary_text_disable_only_material_dark" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textViewBlednyLoginLubHaaslo"
+            android:layout_below="@+id/editTextPassword"
+            android:layout_alignStart="@+id/editTextPassword"
+            android:layout_marginTop="36dp"
+            android:textColor="@android:color/holo_red_dark" />
+
+    </RelativeLayout>
+</LinearLayout>
