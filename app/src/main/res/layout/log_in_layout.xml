@@ -64,7 +64,19 @@
             android:layout_below="@+id/editTextPassword"
             android:layout_alignStart="@+id/editTextPassword"
             android:layout_marginTop="36dp"
-            android:textColor="@android:color/holo_red_dark" />
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Mobile-Dziennik &apos;16"
+            android:id="@+id/mobileDziennikTextView"
+            android:layout_below="@+id/zalogujTextView"
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/holo_red_light" />
 
     </RelativeLayout>
 </LinearLayout>

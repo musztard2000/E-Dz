@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         final String pass = editTextPass.getText().toString();
 
         if (zamokujUdaneLogowanie(login, pass)) {
-            textViewBlednyLoginLubHaslo = null;
+            textViewBlednyLoginLubHaslo.setText(null);
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         } else {
