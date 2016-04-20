@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
             textViewBlednyLoginLubHaslo.setText(null);
             editTextLogin.setText(null);
             editTextPass.setText(null);
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, BusinessActivity.class);
             startActivity(intent);
         } else {
             textViewBlednyLoginLubHaslo.setText("Logowanie nieudane. Błędny login lub hasło.");
