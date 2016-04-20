@@ -14,13 +14,6 @@ public class BusinessActivity extends Activity{
 
     TabHost tabHost;
 
-    String[] przedmiotyArray = {"Język polski", "Matematyka", "Biologia", "Chemia", "Plastyka", "Muzyka", "Wychowanie fizyczne", "Religia / Etyka",
-                            "Geografia", "Historia", "Wiedza o społeczeństwie", "Przysposobienie obronne", "Podstawy przedsiębiorczości",
-                            "Informatyka"};
-
-    String[] wiadomosciArray = {"Mateusz Białkowski", "Anna Kurlanda", "Anna Kurlanda", "Mateusz Białkowski", "Wojciech Antczak",
-            "Mateusz Białkowski", "Anna Kurlanda", "Anna Kurlanda", "Mateusz Białkowski", "Wojciech Antczak",
-            "Mateusz Białkowski", "Anna Kurlanda", "Anna Kurlanda", "Mateusz Białkowski", "Wojciech Antczak",};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +30,7 @@ public class BusinessActivity extends Activity{
 
     private void przygotujTabOcen(TabHost host) {
         ListView listView = (ListView) findViewById(R.id.listViewPrzedmioty);
-        listView.setAdapter(new MobileArrayAdapter(this, przedmiotyArray));
+        listView.setAdapter(new PrzedmiotyArrayAdapter(this));
 
         //Tab 1
         TabHost.TabSpec spec = host.newTabSpec("Oceny");
@@ -48,7 +41,7 @@ public class BusinessActivity extends Activity{
 
     private void przygotujTabWiadomosci(TabHost host) {
         ListView wiadomosciListView = (ListView) findViewById(R.id.listViewWiadomosci);
-        wiadomosciListView.setAdapter(new WiadomosciArrayAdapter(this, wiadomosciArray));
+        wiadomosciListView.setAdapter(new WiadomosciArrayAdapter(this));
 
         //Tab 2
         TabHost.TabSpec spec = host.newTabSpec("Wiadomości");
