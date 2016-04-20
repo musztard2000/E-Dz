@@ -49,11 +49,12 @@
                     android:background="@color/background_floating_material_light"
                     android:orientation="vertical">
 
-                    <TextView
+                    <ListView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="This is tab 2" />
+                        android:id="@+id/listViewWiadomosci" />
                 </LinearLayout>
             </FrameLayout>
         </LinearLayout>
-    </TabHost></LinearLayout>
+    </TabHost>
+</LinearLayout>

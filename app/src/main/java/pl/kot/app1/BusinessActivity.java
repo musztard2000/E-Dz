@@ -14,10 +14,13 @@ public class BusinessActivity extends Activity{
 
     TabHost tabHost;
 
-    // Array of strings...
-    String[] mobileArray = {"Język polski", "Matematyka", "Biologia", "Chemia", "Plastyka", "Muzyka", "Wychowanie fizyczne", "Religia / Etyka",
+    String[] przedmiotyArray = {"Język polski", "Matematyka", "Biologia", "Chemia", "Plastyka", "Muzyka", "Wychowanie fizyczne", "Religia / Etyka",
                             "Geografia", "Historia", "Wiedza o społeczeństwie", "Przysposobienie obronne", "Podstawy przedsiębiorczości",
                             "Informatyka"};
+
+    String[] wiadomosciArray = {"Mateusz Białkowski", "Anna Kurlanda", "Anna Kurlanda", "Mateusz Białkowski", "Wojciech Antczak",
+            "Mateusz Białkowski", "Anna Kurlanda", "Anna Kurlanda", "Mateusz Białkowski", "Wojciech Antczak",
+            "Mateusz Białkowski", "Anna Kurlanda", "Anna Kurlanda", "Mateusz Białkowski", "Wojciech Antczak",};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,20 +30,32 @@ public class BusinessActivity extends Activity{
         TabHost host = (TabHost)findViewById(R.id.tabHost);
         host.setup();
 
+        przygotujTabOcen(host);
+        przygotujTabWiadomosci(host);
+
+    }
+
+    private void przygotujTabOcen(TabHost host) {
         ListView listView = (ListView) findViewById(R.id.listViewPrzedmioty);
-        listView.setAdapter(new MobileArrayAdapter(this, mobileArray));
+        listView.setAdapter(new MobileArrayAdapter(this, przedmiotyArray));
 
         //Tab 1
         TabHost.TabSpec spec = host.newTabSpec("Oceny");
         spec.setContent(R.id.tab1);
         spec.setIndicator("Oceny");
         host.addTab(spec);
+    }
+
+    private void przygotujTabWiadomosci(TabHost host) {
+        ListView wiadomosciListView = (ListView) findViewById(R.id.listViewWiadomosci);
+        wiadomosciListView.setAdapter(new WiadomosciArrayAdapter(this, wiadomosciArray));
 
         //Tab 2
-        spec = host.newTabSpec("Wiadomości");
+        TabHost.TabSpec spec = host.newTabSpec("Wiadomości");
         spec.setContent(R.id.tab2);
         spec.setIndicator("Wiadomości");
         host.addTab(spec);
+
     }
 
     @Override
