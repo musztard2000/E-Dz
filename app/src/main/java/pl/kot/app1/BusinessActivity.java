@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TabHost;
 
 /**
@@ -12,6 +14,12 @@ import android.widget.TabHost;
 public class BusinessActivity extends Activity{
 
     TabHost tabHost;
+
+    // Array of strings...
+    String[] mobileArray = {"Język polski", "Matematyka", "Biologia", "Chemia", "Plastyka", "Muzyka", "Wychowanie fizyczne", "Religia / Etyka",
+                            "Geografia", "Historia", "Wiedza o społeczeństwie", "Przysposobienie obronne", "Podstawy przedsiębiorczości",
+                            "Informatyka"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +27,11 @@ public class BusinessActivity extends Activity{
 
         TabHost host = (TabHost)findViewById(R.id.tabHost);
         host.setup();
+
+        ArrayAdapter adapter = new ArrayAdapter<String>(this, R.layout.przedmioty_list_view, mobileArray);
+
+        ListView listView = (ListView) findViewById(R.id.listViewPrzedmioty);
+        listView.setAdapter(adapter);
 
         //Tab 1
         TabHost.TabSpec spec = host.newTabSpec("Oceny");
