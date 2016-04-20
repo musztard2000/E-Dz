@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="5dp" >
+    android:padding="5dp"
+    android:minHeight="80dp">
 
     <TextView
         android:id="@+id/logo"
@@ -11,7 +12,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
-        android:textSize="50dp"
+        android:textSize="46dp"
          >
     </TextView>
 
@@ -20,7 +21,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@+id/label"
-        android:textSize="20dp" >
+        android:textSize="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/logo">
     </TextView>
 
     <TextView
@@ -28,7 +31,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@+id/oceny"
-        android:textSize="14dp" >
+        android:textSize="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="false"
+        android:layout_toEndOf="@+id/logo">
     </TextView>
 
-</LinearLayout>
+</RelativeLayout>

@@ -29,45 +29,47 @@
             android:minWidth="300dp"
             android:maxWidth="300dp"
             android:layout_below="@+id/zalogujTextView"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:maxLines="1" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/editTextPassword"
             android:hint="Hasło"
-            android:layout_centerVertical="true"
             android:minWidth="300dp"
             android:maxWidth="300dp"
-            android:layout_alignStart="@+id/textEditLogin"
-            android:layout_alignEnd="@+id/textEditLogin"
             android:nestedScrollingEnabled="false"
-            android:password="false" />
+            android:password="false"
+            android:maxLines="1"
+            android:layout_below="@+id/textEditLogin"
+            android:layout_alignStart="@+id/textEditLogin"
+            android:layout_marginTop="21dp" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Zaloguj"
             android:id="@+id/btnZalogujSie"
-            android:layout_marginBottom="63dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
             android:minWidth="200dp"
             android:maxWidth="200dp"
             android:background="@color/colorPrimaryDark"
-            android:textColor="@color/abc_primary_text_disable_only_material_dark" />
+            android:textColor="@color/abc_primary_text_disable_only_material_dark"
+            android:layout_marginTop="36dp"
+            android:layout_below="@+id/textViewBlednyLoginLubHaaslo"
+            android:layout_centerHorizontal="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/textViewBlednyLoginLubHaaslo"
-            android:layout_below="@+id/editTextPassword"
-            android:layout_alignStart="@+id/editTextPassword"
-            android:layout_marginTop="36dp"
             android:textColor="@android:color/holo_red_light"
             android:textSize="16dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_marginTop="25dp"
+            android:layout_below="@+id/editTextPassword"
+            android:layout_alignStart="@+id/editTextPassword" />
 
         <TextView
             android:layout_width="wrap_content"
