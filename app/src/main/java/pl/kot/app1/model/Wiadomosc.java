@@ -1,11 +1,12 @@
 package pl.kot.app1.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Damian on 20/04/2016.
  */
-public class Wiadomosc {
+public class Wiadomosc implements Serializable{
     private String nadawca;
     private String temat;
     private String tresc;

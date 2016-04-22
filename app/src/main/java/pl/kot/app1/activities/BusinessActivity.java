@@ -1,19 +1,22 @@
-package pl.kot.app1;
+package pl.kot.app1.activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TabHost;
+
+import pl.kot.app1.R;
+import pl.kot.app1.adapters.PrzedmiotyArrayAdapter;
+import pl.kot.app1.adapters.WiadomosciArrayAdapter;
+import pl.kot.app1.model.Wiadomosc;
 
 /**
  * Created by Damian on 20/04/2016.
  */
 public class BusinessActivity extends Activity{
-
-    TabHost tabHost;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,13 @@ public class BusinessActivity extends Activity{
     private void przygotujTabWiadomosci(TabHost host) {
         ListView wiadomosciListView = (ListView) findViewById(R.id.listViewWiadomosci);
         wiadomosciListView.setAdapter(new WiadomosciArrayAdapter(this));
+        wiadomosciListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final Wiadomosc aktualnaWiadomsc = (Wiadomosc) adapterView.getItemAtPosition(i);
+                przejdzDoPodgladu(aktualnaWiadomsc);
+            }
+        });
 
         //Tab 2
         TabHost.TabSpec spec = host.newTabSpec("Wiadomości");
@@ -51,25 +61,10 @@ public class BusinessActivity extends Activity{
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+    private void przejdzDoPodgladu(Wiadomosc aktualnieWybranaWiadomosc) {
+        Intent intent = new Intent(this, PodgladWiadomosciActivity.class);
+        intent.putExtra("AKTUALNA_WIADOMOSC", aktualnieWybranaWiadomosc);
+        startActivity(intent);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }

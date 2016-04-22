@@ -1,4 +1,4 @@
-package pl.kot.app1;
+package pl.kot.app1.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
+import pl.kot.app1.R;
 import pl.kot.app1.model.Wiadomosc;
 import pl.kot.app1.service.WiadomosciService;
 
@@ -46,8 +47,6 @@ public class WiadomosciArrayAdapter extends ArrayAdapter<Wiadomosc> {
         textViewNadawca.setText(nazwaPrzedmiotu.getNadawca());
         textViewTemat.setText(nazwaPrzedmiotu.getTemat());
         textViewData.setText(SIMPLE_DATE_FORMAT.format(nazwaPrzedmiotu.getDataWyslania()));
-
-        System.out.println(nazwaPrzedmiotu.getTresc());
 
         return rowView;
     }

@@ -1,4 +1,4 @@
-package pl.kot.app1;
+package pl.kot.app1.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import pl.kot.app1.R;
 import pl.kot.app1.model.Przedmiot;
 import pl.kot.app1.service.PrzedmiotyService;
 

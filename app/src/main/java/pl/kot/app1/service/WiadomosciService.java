@@ -12,22 +12,40 @@ import pl.kot.app1.model.Wiadomosc;
 public class WiadomosciService {
 
     public List<Wiadomosc> generujWiadmosci() {
+
+        final String TRRESC = "Przykładowa treść wiadomości, którą chciałbym wyświetlić. Niestety jest to tylko mock. " +
+                "Przykładowa treść wiadomości, którą chciałbym wyświetlić. Niestety jest to tylko mock. " +
+                "Przykładowa treść wiadomości, którą chciałbym wyświetlić. Niestety jest to tylko mock. " +
+                "Przykładowa treść wiadomości, którą chciałbym wyświetlić. Niestety jest to tylko mock. " +
+                "Przykładowa treść wiadomości, którą chciałbym wyświetlić. Niestety jest to tylko mock. " +
+                "Przykładowa treść wiadomości, którą chciałbym wyświetlić. Niestety jest to tylko mock. " +
+                "Przykładowa treść wiadomości, którą chciałbym wyświetlić. Niestety jest to tylko mock. " +
+                "Przykładowa treść wiadomości, którą chciałbym wyświetlić. Niestety jest to tylko mock. " +
+                "Przykładowa treść wiadomości, którą chciałbym wyświetlić. Niestety jest to tylko mock. " +
+                "Przykładowa treść wiadomości, którą chciałbym wyświetlić. Niestety jest to tylko mock. " +
+                "Przykładowa treść wiadomości, którą chciałbym wyświetlić. Niestety jest to tylko mock. " +
+                "Przykładowa treść wiadomości, którą chciałbym wyświetlić. Niestety jest to tylko mock. " +
+                "Przykładowa treść wiadomości, którą chciałbym wyświetlić. Niestety jest to tylko mock. " +
+                "Przykładowa treść wiadomości, którą chciałbym wyświetlić. Niestety jest to tylko mock. " +
+                "Przykładowa treść wiadomości, którą chciałbym wyświetlić. Niestety jest to tylko mock. " +
+                "Przykładowa treść wiadomości, którą chciałbym wyświetlić. Niestety jest to tylko mock. ";
+
         List<Wiadomosc> wiadomosciList = new ArrayList<>();
-        wiadomosciList.add(new Wiadomosc(new Date(), "Przykładowa treść 1", "Jakiś temat szkolny", "Anna Kurlanda"));
-        wiadomosciList.add(new Wiadomosc(new Date(), "Przykładowa treść 2", "Jakiś temat ważny", "Miron Białoszewski"));
-        wiadomosciList.add(new Wiadomosc(new Date(), "Przykładowa treść 3", "Jakiś temat", "Mariusz Gałka"));
-        wiadomosciList.add(new Wiadomosc(new Date(), "Przykładowa treść 4", "Jakiś temat 2", "Wisława Szymborska"));
-        wiadomosciList.add(new Wiadomosc(new Date(), "Przykładowa treść 5", "Jakiś temat klasówki", "Krysyna Pawłowicz"));
-        wiadomosciList.add(new Wiadomosc(new Date(), "Przykładowa treść 1", "Jakiś temat szkolny", "Anna Kurlanda"));
-        wiadomosciList.add(new Wiadomosc(new Date(), "Przykładowa treść 2", "Jakiś temat ważny", "Miron Białoszewski"));
-        wiadomosciList.add(new Wiadomosc(new Date(), "Przykładowa treść 3", "Jakiś temat", "Mariusz Gałka"));
-        wiadomosciList.add(new Wiadomosc(new Date(), "Przykładowa treść 4", "Jakiś temat 2", "Wisława Szymborska"));
-        wiadomosciList.add(new Wiadomosc(new Date(), "Przykładowa treść 5", "Jakiś temat klasówki", "Krysyna Pawłowicz"));
-        wiadomosciList.add(new Wiadomosc(new Date(), "Przykładowa treść 1", "Jakiś temat szkolny", "Anna Kurlanda"));
-        wiadomosciList.add(new Wiadomosc(new Date(), "Przykładowa treść 2", "Jakiś temat ważny", "Miron Białoszewski"));
-        wiadomosciList.add(new Wiadomosc(new Date(), "Przykładowa treść 3", "Jakiś temat", "Mariusz Gałka"));
-        wiadomosciList.add(new Wiadomosc(new Date(), "Przykładowa treść 4", "Jakiś temat 2", "Wisława Szymborska"));
-        wiadomosciList.add(new Wiadomosc(new Date(), "Przykładowa treść 5", "Jakiś temat klasówki", "Krysyna Pawłowicz"));
+        wiadomosciList.add(new Wiadomosc(new Date(), TRRESC, "Jakiś temat szkolny", "Anna Kurlanda"));
+        wiadomosciList.add(new Wiadomosc(new Date(), TRRESC, "Jakiś temat ważny", "Miron Białoszewski"));
+        wiadomosciList.add(new Wiadomosc(new Date(), TRRESC, "Jakiś temat", "Mariusz Gałka"));
+        wiadomosciList.add(new Wiadomosc(new Date(), TRRESC, "Jakiś temat 2", "Wisława Szymborska"));
+        wiadomosciList.add(new Wiadomosc(new Date(), TRRESC, "Jakiś temat klasówki", "Krysyna Pawłowicz"));
+        wiadomosciList.add(new Wiadomosc(new Date(), TRRESC, "Jakiś temat szkolny", "Anna Kurlanda"));
+        wiadomosciList.add(new Wiadomosc(new Date(), TRRESC, "Jakiś temat ważny", "Miron Białoszewski"));
+        wiadomosciList.add(new Wiadomosc(new Date(), TRRESC, "Jakiś temat", "Mariusz Gałka"));
+        wiadomosciList.add(new Wiadomosc(new Date(), TRRESC, "Jakiś temat 2", "Wisława Szymborska"));
+        wiadomosciList.add(new Wiadomosc(new Date(), TRRESC, "Jakiś temat klasówki", "Krysyna Pawłowicz"));
+        wiadomosciList.add(new Wiadomosc(new Date(), TRRESC, "Jakiś temat szkolny", "Anna Kurlanda"));
+        wiadomosciList.add(new Wiadomosc(new Date(), TRRESC, "Jakiś temat ważny", "Miron Białoszewski"));
+        wiadomosciList.add(new Wiadomosc(new Date(), TRRESC, "Jakiś temat", "Mariusz Gałka"));
+        wiadomosciList.add(new Wiadomosc(new Date(), TRRESC, "Jakiś temat 2", "Wisława Szymborska"));
+        wiadomosciList.add(new Wiadomosc(new Date(), TRRESC, "Jakiś temat klasówki", "Krysyna Pawłowicz"));
 
         return wiadomosciList;
 

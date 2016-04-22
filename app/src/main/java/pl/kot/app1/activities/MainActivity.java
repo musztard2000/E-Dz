@@ -1,4 +1,4 @@
-package pl.kot.app1;
+package pl.kot.app1.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import pl.kot.app1.R;
 
 public class MainActivity extends Activity {
 
@@ -19,10 +21,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_main);
 
-        outputTextView = (TextView) findViewById(R.id.totalTextView);
-        percentageEditText = (EditText) findViewById(R.id.procentTextEdit);
-        numberEditText = (EditText) findViewById(R.id.numberTextEdit);
-        calculatePercentageButton = (Button) findViewById(R.id.calculatePercentageBtn);
+        inicjujKomponenty();
 
         calculatePercentageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,5 +32,12 @@ public class MainActivity extends Activity {
                 outputTextView.setText(Float.toString(rezultat));
             }
         });
+    }
+
+    private void inicjujKomponenty() {
+        outputTextView = (TextView) findViewById(R.id.totalTextView);
+        percentageEditText = (EditText) findViewById(R.id.procentTextEdit);
+        numberEditText = (EditText) findViewById(R.id.numberTextEdit);
+        calculatePercentageButton = (Button) findViewById(R.id.calculatePercentageBtn);
     }
 }

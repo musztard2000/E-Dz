@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Nadawca"
+            android:id="@+id/wiadPogladNadawca"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/textViewTematLbl" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Data"
+            android:id="@+id/wiadPodglData"
+            android:layout_alignBottom="@+id/wiadPogladNadawca"
+            android:layout_alignEnd="@+id/textViewTrescWiadomosci" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Temat"
+            android:id="@+id/wiadPodgladTemat"
+            android:layout_below="@+id/wiadPogladNadawca"
+            android:layout_toEndOf="@+id/textViewTematLbl"
+            android:layout_marginTop="22dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Od: "
+            android:id="@+id/textViewOd"
+            android:layout_above="@+id/wiadPodgladTemat"
+            android:layout_alignStart="@+id/textViewTrescWiadomosci" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Temat: "
+            android:id="@+id/textViewTematLbl"
+            android:layout_alignTop="@+id/wiadPodgladTemat"
+            android:layout_alignStart="@+id/textViewTrescWiadomosci" />
+
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Tresc"
+            android:id="@+id/textViewTrescWiadomosci"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/textViewTematLbl"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginBottom="2dp"
+            android:scrollbars = "vertical"
+            android:foreground="@color/abc_primary_text_material_light" />
+
+    </RelativeLayout>
+</LinearLayout>

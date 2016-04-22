@@ -3,4 +3,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#495185</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="brudnyBlue">#d6d6f5</color>
+    <color name="brudnyRed">#ffcccc</color>
+
+
 </resources>
