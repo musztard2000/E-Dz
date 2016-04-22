@@ -17,10 +17,10 @@
     </TextView>
 
     <TextView
-        android:id="@+id/label"
+        android:id="@+id/textViewNadawcaWiadomosci"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@+id/label"
+        android:text="@+id/textViewNadawcaWiadomosci"
         android:textSize="20dp"
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/logo">

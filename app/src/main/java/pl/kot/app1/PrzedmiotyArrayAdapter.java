@@ -35,7 +35,7 @@ public class PrzedmiotyArrayAdapter extends ArrayAdapter<Przedmiot> {
         final Przedmiot przedmiot = przedmioty.get(position);
 
         View rowView = inflater.inflate(R.layout.przedmioty_list_view, parent, false);
-        TextView textViewNazwaPrzedmiotu = (TextView) rowView.findViewById(R.id.label);
+        TextView textViewNazwaPrzedmiotu = (TextView) rowView.findViewById(R.id.textViewNadawcaWiadomosci);
         TextView textViewLogoPrzedmiotu = (TextView) rowView.findViewById(R.id.logo);
         TextView textViewListaOcen = (TextView) rowView.findViewById(R.id.oceny);
         textViewNazwaPrzedmiotu.setText(przedmiot.getNazwaPrzedmiotu());
