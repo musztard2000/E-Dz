@@ -5,7 +5,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark">
 
         <TextView
             android:layout_width="wrap_content"
@@ -13,17 +14,24 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Nadawca"
             android:id="@+id/wiadPogladNadawca"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/textViewTematLbl" />
+            android:textColor="@color/white"
+            android:layout_below="@+id/wiadPodglData"
+            android:layout_alignStart="@+id/wiadPodgladTemat" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Data"
             android:id="@+id/wiadPodglData"
-            android:layout_alignBottom="@+id/wiadPogladNadawca"
-            android:layout_alignEnd="@+id/textViewTrescWiadomosci" />
+            android:textColor="@color/white"
+            android:layout_alignStart="@+id/textViewTrescWiadomosci"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/wiadPogladNadawca"
+            android:textAlignment="viewEnd"
+            android:layout_alignEnd="@+id/textViewTrescWiadomosci"
+            android:layout_alignParentEnd="false"
+            android:layout_alignParentStart="false" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,27 +39,33 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Temat"
             android:id="@+id/wiadPodgladTemat"
+            android:textColor="@color/white"
             android:layout_below="@+id/wiadPogladNadawca"
             android:layout_toEndOf="@+id/textViewTematLbl"
-            android:layout_marginTop="22dp" />
+            android:layout_marginStart="15dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Od: "
             android:id="@+id/textViewOd"
-            android:layout_above="@+id/wiadPodgladTemat"
-            android:layout_alignStart="@+id/textViewTrescWiadomosci" />
+            android:foreground="@color/white"
+            android:textColor="@color/white"
+            android:textAlignment="textEnd"
+            android:layout_alignBottom="@+id/wiadPogladNadawca"
+            android:layout_alignStart="@+id/wiadPodglData" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Temat: "
             android:id="@+id/textViewTematLbl"
-            android:layout_alignTop="@+id/wiadPodgladTemat"
-            android:layout_alignStart="@+id/textViewTrescWiadomosci" />
+            android:textColor="@color/white"
+            android:layout_alignBaseline="@+id/wiadPodgladTemat"
+            android:layout_alignBottom="@+id/wiadPodgladTemat"
+            android:layout_alignParentStart="true" />
 
 
 

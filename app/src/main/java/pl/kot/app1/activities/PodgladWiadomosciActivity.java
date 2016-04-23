@@ -53,9 +53,8 @@ public class PodgladWiadomosciActivity extends Activity {
     }
 
     private void ustalKoloryKomponentow() {
-        textViewTemat.setTextColor(getResources().getColor(R.color.black));
         textViewTresc.setMovementMethod(new ScrollingMovementMethod()); // tu ustalam scrollbar!
-        textViewTresc.setBackgroundResource(R.color.brudnyBlue);
+        textViewTresc.setBackgroundResource(R.color.white);
         textViewTresc.setTextColor(getResources().getColor(R.color.black));
     }
 

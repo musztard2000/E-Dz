@@ -2,11 +2,13 @@ package pl.kot.app1.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TabHost;
+import android.widget.TextView;
 
 import pl.kot.app1.R;
 import pl.kot.app1.adapters.PrzedmiotyArrayAdapter;
@@ -23,8 +25,27 @@ public class BusinessActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.business_layout);
 
-        TabHost host = (TabHost)findViewById(R.id.tabHost);
+        final TabHost host = (TabHost)findViewById(R.id.tabHost);
         host.setup();
+        host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+
+            @Override
+            public void onTabChanged(String tabId) {
+
+                //Unselected Tabs
+                for (int i = 0; i < host.getTabWidget().getChildCount(); i++) {
+                    TextView tv = (TextView) host.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
+                    tv.setTextColor(Color.parseColor("#000000"));
+                    tv.setTextSize(12);
+                }
+
+                //for Selected Tab
+                TextView tv = (TextView) host.getCurrentTabView().findViewById(android.R.id.title);
+                tv.setTextColor(Color.parseColor("#ffffff"));
+                tv.setTextSize(16);
+
+            }
+        });
 
         przygotujTabOcen(host);
         przygotujTabWiadomosci(host);
