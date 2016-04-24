@@ -55,7 +55,15 @@ public class PodgladWiadomosciActivity extends Activity {
         textViewTemat.setText(otwartaWiadomosc.getTemat());
         textViewData.setText(SIMPLE_DATE_FORMAT.format(otwartaWiadomosc.getDataWyslania()));
 
-
+        /*
+            co się dzieje:
+            - w moim activity tworzę obiekt klasy DziennikRestClient, i wykonuję na nim metodę
+            execute(). Powyższy obiekt rozszerza klasę 'AsyncTask', typową do takiej pracy
+            w androidzie. Chciałem dlatego by była to klasa uniwersalana. A że pobieranie z interntu
+            zawsze takie samo, tylko różne są treści, to jako parametr dodaję obiekt implementujący
+            initerfejs 'ClientRestowy'. Posiada on (interfejs) dwie metody, używane w logice klasy
+            'DziennikRestClient' zajmującej się miesem obsługi żądania.
+         */
         new DziennikRestClient(new ClientRestowyUstawPrzeczytana(this)).execute(); //todo: dalsza praca!
 
         textViewTresc.setText(otwartaWiadomosc.getTresc());
