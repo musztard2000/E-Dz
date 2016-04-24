@@ -4,9 +4,9 @@ package pl.kot.app1.activities;
  * Created by Damian on 24/04/2016.
  */
 public interface ClientRestowy {
+    String URL_UCZNIOWIE = "http://10.0.2.2:8080/webservices/webapi/uczniowie";
 
     String getRestResourceURL();
-
     /**
      *
      * @param inputText - Odpowiedź na request.

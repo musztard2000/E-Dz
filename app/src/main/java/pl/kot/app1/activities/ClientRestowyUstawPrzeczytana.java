@@ -20,8 +20,10 @@ public class ClientRestowyUstawPrzeczytana implements ClientRestowy {
 
     @Override
     public String getRestResourceURL() {
-        return "http://10.0.2.2:8080/webservices/webapi/uczniowie/2";
+        return URL_UCZNIOWIE;
     }
+
+
 
     @Override
     public void proccessView(String inputText) {
