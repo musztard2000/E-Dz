@@ -29,6 +29,7 @@ public class BusinessActivity extends Activity{
         tabHostOcenIWiadomosci.setup();
 
         dodajListenerNawigacjiPomiedzyTabami(tabHostOcenIWiadomosci);
+        przygotujTabOsiCzasu(tabHostOcenIWiadomosci);
         przygotujTabOcen(tabHostOcenIWiadomosci);
         przygotujTabWiadomosci(tabHostOcenIWiadomosci);
     }
@@ -57,6 +58,14 @@ public class BusinessActivity extends Activity{
             }
         });
     }
+
+    private void przygotujTabOsiCzasu(TabHost host) {
+        TabHost.TabSpec tabOsiCzasu = host.newTabSpec("Oś czasu");
+        tabOsiCzasu.setContent(R.id.tabOsiCzasu);
+        tabOsiCzasu.setIndicator("Oś czasu");
+        host.addTab(tabOsiCzasu);
+    }
+
 
     private void przygotujTabOcen(TabHost host) {
         TabHost.TabSpec tabOcen = host.newTabSpec("Oceny");
