@@ -22,6 +22,7 @@ public class PodgladWiadomosciActivity extends Activity {
     private TextView textViewTemat;
     private TextView textViewData;
     private TextView textViewTresc;
+    private Wiadomosc otwartaWiadomosc;
 
 
     @Override
@@ -33,9 +34,13 @@ public class PodgladWiadomosciActivity extends Activity {
 
         ustalKoloryKomponentow();
 
-        final Wiadomosc OTWARTA_WIADOMOSC = (Wiadomosc) getIntent().getExtras().getSerializable("AKTUALNA_WIADOMOSC");
-        ustalZawartoscKomponentowZOtwartejWiadomosci(OTWARTA_WIADOMOSC);
-
+        /**
+         * Jest to obiekt, który jest odebrany wprost z miejsca, które inicjuje tę klasę.
+         * Na ten moment, jest to kliknięcie wiadomości z listy wiadomości.
+         *
+         */
+        otwartaWiadomosc = (Wiadomosc) getIntent().getExtras().getSerializable("AKTUALNA_WIADOMOSC");
+        ustalZawartoscKomponentowZOtwartejWiadomosci(otwartaWiadomosc);
     }
 
     private void inicjujKomponenty() {
@@ -49,7 +54,12 @@ public class PodgladWiadomosciActivity extends Activity {
         textViewNadawca.setText(otwartaWiadomosc.getNadawca());
         textViewTemat.setText(otwartaWiadomosc.getTemat());
         textViewData.setText(SIMPLE_DATE_FORMAT.format(otwartaWiadomosc.getDataWyslania()));
+
+
+        new DziennikRestClient(new ClientRestowyUstawPrzeczytana(this)).execute(); //todo: dalsza praca!
+
         textViewTresc.setText(otwartaWiadomosc.getTresc());
+
     }
 
     private void ustalKoloryKomponentow() {
@@ -58,4 +68,21 @@ public class PodgladWiadomosciActivity extends Activity {
         textViewTresc.setTextColor(getResources().getColor(R.color.black));
     }
 
+    public TextView getTextViewTresc() {
+        return textViewTresc;
+    }
+
+    public void setTextViewTresc(TextView textViewTresc) {
+        this.textViewTresc = textViewTresc;
+    }
+
+    public Wiadomosc getOtwartaWiadomosc() {
+        return otwartaWiadomosc;
+    }
+
+    public void setOtwartaWiadomosc(Wiadomosc otwartaWiadomosc) {
+        this.otwartaWiadomosc = otwartaWiadomosc;
+    }
 }
+
+
