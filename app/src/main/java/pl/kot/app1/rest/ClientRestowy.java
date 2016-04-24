@@ -1,11 +1,11 @@
-package pl.kot.app1.activities;
+package pl.kot.app1.rest;
 
 /**
  * Created by Damian on 24/04/2016.
  */
 public interface ClientRestowy {
     String URL_UCZNIOWIE = "http://10.0.2.2:8080/webservices/webapi/uczniowie";
-
+    String URL_OPIEKUN = "http://10.0.2.2:8080/webservices/webapi/uczniowie/opiekun";
     String getRestResourceURL();
     /**
      *

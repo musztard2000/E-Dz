@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import pl.kot.app1.R;
+import pl.kot.app1.rest.DziennikRestClient;
+import pl.kot.app1.rest.clients.ClientRestowyZnajdzOpiekuna;
 
 /**
  * Created by Damian on 19/04/2016.
@@ -31,7 +33,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 System.out.println("click");
-                zaloguj();
+
+//                zaloguj();
+
+                zalogujPrzezREST();
             }
         });
 
@@ -64,4 +69,44 @@ public class LoginActivity extends AppCompatActivity {
         return ("dam".equals(login) && "kot".equals(password));
     }
 
+
+    private void zalogujPrzezREST() {
+        final String login = editTextLogin.getText().toString();
+        final String pass = editTextPass.getText().toString();
+
+        new DziennikRestClient(new ClientRestowyZnajdzOpiekuna(this, login, pass)).execute();
+    }
+
+
+    public Button getBtnZalogujSie() {
+        return btnZalogujSie;
+    }
+
+    public void setBtnZalogujSie(Button btnZalogujSie) {
+        this.btnZalogujSie = btnZalogujSie;
+    }
+
+    public EditText getEditTextLogin() {
+        return editTextLogin;
+    }
+
+    public void setEditTextLogin(EditText editTextLogin) {
+        this.editTextLogin = editTextLogin;
+    }
+
+    public EditText getEditTextPass() {
+        return editTextPass;
+    }
+
+    public void setEditTextPass(EditText editTextPass) {
+        this.editTextPass = editTextPass;
+    }
+
+    public TextView getTextViewBlednyLoginLubHaslo() {
+        return textViewBlednyLoginLubHaslo;
+    }
+
+    public void setTextViewBlednyLoginLubHaslo(TextView textViewBlednyLoginLubHaslo) {
+        this.textViewBlednyLoginLubHaslo = textViewBlednyLoginLubHaslo;
+    }
 }

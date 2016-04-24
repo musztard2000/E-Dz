@@ -25,8 +25,19 @@ public class BusinessActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.business_layout);
 
-        final TabHost host = (TabHost)findViewById(R.id.tabHost);
-        host.setup();
+        final TabHost tabHostOcenIWiadomosci = (TabHost)findViewById(R.id.tabHost);
+        tabHostOcenIWiadomosci.setup();
+
+        dodajListenerNawigacjiPomiedzyTabami(tabHostOcenIWiadomosci);
+        przygotujTabOcen(tabHostOcenIWiadomosci);
+        przygotujTabWiadomosci(tabHostOcenIWiadomosci);
+    }
+
+    /**
+     * Poniższy kod służy do obsługi zmiany tabów. Zmienia rozmiar i kolor tabom aktywnym i nieaktywnym.
+     * @param host
+     */
+    private void dodajListenerNawigacjiPomiedzyTabami(final TabHost host) {
         host.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
 
             @Override
@@ -43,49 +54,49 @@ public class BusinessActivity extends Activity{
                 TextView tv = (TextView) host.getCurrentTabView().findViewById(android.R.id.title);
                 tv.setTextColor(Color.parseColor("#ffffff"));
                 tv.setTextSize(16);
-
             }
         });
-
-        przygotujTabOcen(host);
-        przygotujTabWiadomosci(host);
-
     }
 
     private void przygotujTabOcen(TabHost host) {
-        ListView listView = (ListView) findViewById(R.id.listViewPrzedmioty);
-        listView.setAdapter(new PrzedmiotyArrayAdapter(this));
+        TabHost.TabSpec tabOcen = host.newTabSpec("Oceny");
+        tabOcen.setContent(R.id.tabOcen);
+        tabOcen.setIndicator("Oceny");
+        host.addTab(tabOcen);
 
-        //Tab 1
-        TabHost.TabSpec spec = host.newTabSpec("Oceny");
-        spec.setContent(R.id.tab1);
-        spec.setIndicator("Oceny");
-        host.addTab(spec);
+        wypelnijListViewOceny();
+    }
+
+    private void wypelnijListViewOceny() {
+        ListView przedmiotyListView = (ListView) findViewById(R.id.listViewPrzedmioty);
+        przedmiotyListView.setAdapter(new PrzedmiotyArrayAdapter(this));
     }
 
     private void przygotujTabWiadomosci(TabHost host) {
+        TabHost.TabSpec tabWiadomosci = host.newTabSpec("Wiadomości");
+        tabWiadomosci.setContent(R.id.tabWiadomosci);
+        tabWiadomosci.setIndicator("Wiadomości");
+        host.addTab(tabWiadomosci);
+
+        wypelnijListViewWiadomosci();
+    }
+
+    private void wypelnijListViewWiadomosci() {
         ListView wiadomosciListView = (ListView) findViewById(R.id.listViewWiadomosci);
         wiadomosciListView.setAdapter(new WiadomosciArrayAdapter(this));
         wiadomosciListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final Wiadomosc aktualnaWiadomsc = (Wiadomosc) adapterView.getItemAtPosition(i);
-                przejdzDoPodgladu(aktualnaWiadomsc);
+                przejdzDoPodgladuWybranejWiadomosci(aktualnaWiadomsc);
             }
         });
-
-        //Tab 2
-        TabHost.TabSpec spec = host.newTabSpec("Wiadomości");
-        spec.setContent(R.id.tab2);
-        spec.setIndicator("Wiadomości");
-        host.addTab(spec);
-
     }
 
-    private void przejdzDoPodgladu(Wiadomosc aktualnieWybranaWiadomosc) {
+    private void przejdzDoPodgladuWybranejWiadomosci(Wiadomosc aktualnieWybranaWiadomosc) {
         Intent intent = new Intent(this, PodgladWiadomosciActivity.class);
         intent.putExtra("AKTUALNA_WIADOMOSC", aktualnieWybranaWiadomosc);
         startActivity(intent);
-
     }
+
 }

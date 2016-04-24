@@ -1,4 +1,4 @@
-package pl.kot.app1.activities;
+package pl.kot.app1.rest;
 
 import android.os.AsyncTask;
 
@@ -41,6 +41,7 @@ public class DziennikRestClient extends AsyncTask<Void, Void, String> {
         HttpContext localContext = new BasicHttpContext();
         HttpGet httpGet = new HttpGet(clientRestowyImpl.getRestResourceURL());
         String text = null;
+
         try {
             HttpResponse response = httpClient.execute(httpGet, localContext);
             HttpEntity entity = response.getEntity();
@@ -48,7 +49,8 @@ public class DziennikRestClient extends AsyncTask<Void, Void, String> {
             text = getASCIIContentFromEntity(entity);
 
         } catch (Exception e) {
-            return e.getLocalizedMessage();
+            System.out.println("EXCEPTION: " + e.toString());
+            return null;
         }
 
         return text;

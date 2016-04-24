@@ -10,6 +10,8 @@ import java.util.Locale;
 
 import pl.kot.app1.R;
 import pl.kot.app1.model.Wiadomosc;
+import pl.kot.app1.rest.DziennikRestClient;
+import pl.kot.app1.rest.clients.ClientRestowyUstawPrzeczytana;
 
 /**
  * Created by Damian on 22/04/2016.

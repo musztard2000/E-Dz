@@ -1,6 +1,9 @@
-package pl.kot.app1.activities;
+package pl.kot.app1.rest.clients;
 
 import android.content.Context;
+
+import pl.kot.app1.activities.PodgladWiadomosciActivity;
+import pl.kot.app1.rest.ClientRestowy;
 
 /**
  * Created by Damian on 24/04/2016.
