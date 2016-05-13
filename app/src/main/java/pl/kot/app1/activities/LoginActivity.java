@@ -10,8 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import pl.kot.app1.R;
-import pl.kot.app1.rest.DziennikRestClient;
-import pl.kot.app1.rest.clients.ClientRestowyZnajdzOpiekuna;
+import pl.kot.app1.rest.RestProccessor;
+import pl.kot.app1.rest.clients.ClientRestowyLogowanie;
 
 /**
  * Created by Damian on 19/04/2016.
@@ -74,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
         final String login = editTextLogin.getText().toString();
         final String pass = editTextPass.getText().toString();
 
-        new DziennikRestClient(new ClientRestowyZnajdzOpiekuna(this, login, pass)).execute();
+        new RestProccessor(new ClientRestowyLogowanie(this, login, pass)).execute();
     }
 
 

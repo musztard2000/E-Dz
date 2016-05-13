@@ -11,7 +11,7 @@ import pl.kot.app1.rest.ClientRestowy;
 public class ClientRestowyUstawPrzeczytana implements ClientRestowy {
 
     /**
-     * Referencja do 'Activity', które akurat wywoła DziennikRestClient, które wykona
+     * Referencja do 'Activity', które akurat wywoła RestProccessor, które wykona
      * pracę RESTOWĄ, a które tutaj będzie miało manipulowane jakoś atrybuty
      * swoich komponentów.
      */

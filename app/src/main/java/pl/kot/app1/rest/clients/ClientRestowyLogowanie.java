@@ -10,9 +10,9 @@ import pl.kot.app1.rest.ClientRestowy;
 /**
  * Created by Damian on 24/04/2016.
  */
-public class ClientRestowyZnajdzOpiekuna implements ClientRestowy {
+public class ClientRestowyLogowanie implements ClientRestowy {
     /**
-     * Referencja do 'Activity', które akurat wywoła DziennikRestClient, które wykona
+     * Referencja do 'Activity', które akurat wywoła RestProccessor, które wykona
      * pracę RESTOWĄ, a które tutaj będzie miało manipulowane jakoś atrybuty
      * swoich komponentów.
      */
@@ -20,7 +20,7 @@ public class ClientRestowyZnajdzOpiekuna implements ClientRestowy {
     private String login;
     private String password;
 
-    public ClientRestowyZnajdzOpiekuna(Context context, String login, String password) {
+    public ClientRestowyLogowanie(Context context, String login, String password) {
         this.context = context;
         this.login = login;
         this.password = password;
@@ -34,7 +34,7 @@ public class ClientRestowyZnajdzOpiekuna implements ClientRestowy {
     @Override
     public void proccessView(String inputText) {
         if (inputText != null && !inputText.isEmpty()) {
-
+            System.out.println("INPUT TEXT OF CLIENT RESTOWY LOGOWANIE: " + inputText);
             ((LoginActivity) context).getTextViewBlednyLoginLubHaslo().setText(null);
             ((LoginActivity) context).getEditTextLogin().setText(null);
             ((LoginActivity) context).getEditTextPass().setText(null);

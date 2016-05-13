@@ -24,14 +24,14 @@ import java.io.InputStream;
  *
  * Created by Damian on 24/04/2016.
  */
-public class DziennikRestClient extends AsyncTask<Void, Void, String> {
+public class RestProccessor extends AsyncTask<Void, Void, String> {
 
     /**
      * Obiekt typu clientRestowyImpl.
      */
     protected ClientRestowy clientRestowyImpl;
 
-    public DziennikRestClient(ClientRestowy clientRestowy) {
+    public RestProccessor(ClientRestowy clientRestowy) {
         this.clientRestowyImpl = clientRestowy;
     }
 

@@ -16,6 +16,10 @@ import pl.kot.app1.adapters.WiadomosciArrayAdapter;
 import pl.kot.app1.model.Wiadomosc;
 
 /**
+ * Jest to activity które uruchamia się po udanym logowaniu.
+ * W jego metodzie <code>onCreate</code> odbywa się m. in.
+ * ładowanie treści po zalogowaniu.
+ *
  * Created by Damian on 20/04/2016.
  */
 public class BusinessActivity extends Activity{
@@ -93,6 +97,11 @@ public class BusinessActivity extends Activity{
     private void wypelnijListViewWiadomosci() {
         ListView wiadomosciListView = (ListView) findViewById(R.id.listViewWiadomosci);
         wiadomosciListView.setAdapter(new WiadomosciArrayAdapter(this));
+
+        dodajListenerPodgladuAktualnieWybranejWiadomosci(wiadomosciListView);
+    }
+
+    private void dodajListenerPodgladuAktualnieWybranejWiadomosci(ListView wiadomosciListView) {
         wiadomosciListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -102,6 +111,14 @@ public class BusinessActivity extends Activity{
         });
     }
 
+    /**
+     * Otwiera nowe activity aktualnie wybranej wiadomosci.
+     * W tej meodzie przekazywany jest obiekt 'Wiadomosc' pomiedzy
+     * dwoma activity.
+     *
+     * @param aktualnieWybranaWiadomosc - Aktualnie wybrana wiadomosc, ktora
+     *                                  jest przekazywana pomiedzy dwoma activity.
+     */
     private void przejdzDoPodgladuWybranejWiadomosci(Wiadomosc aktualnieWybranaWiadomosc) {
         Intent intent = new Intent(this, PodgladWiadomosciActivity.class);
         intent.putExtra("AKTUALNA_WIADOMOSC", aktualnieWybranaWiadomosc);

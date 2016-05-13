@@ -10,7 +10,7 @@ import java.util.Locale;
 
 import pl.kot.app1.R;
 import pl.kot.app1.model.Wiadomosc;
-import pl.kot.app1.rest.DziennikRestClient;
+import pl.kot.app1.rest.RestProccessor;
 import pl.kot.app1.rest.clients.ClientRestowyUstawPrzeczytana;
 
 /**
@@ -36,7 +36,7 @@ public class PodgladWiadomosciActivity extends Activity {
 
         ustalKoloryKomponentow();
 
-        /**
+        /*
          * Jest to obiekt, który jest odebrany wprost z miejsca, które inicjuje tę klasę.
          * Na ten moment, jest to kliknięcie wiadomości z listy wiadomości.
          *
@@ -59,17 +59,16 @@ public class PodgladWiadomosciActivity extends Activity {
 
         /*
             co się dzieje:
-            - w moim activity tworzę obiekt klasy DziennikRestClient, i wykonuję na nim metodę
+            - w moim activity tworzę obiekt klasy RestProccessor, i wykonuję na nim metodę
             execute(). Powyższy obiekt rozszerza klasę 'AsyncTask', typową do takiej pracy
             w androidzie. Chciałem dlatego by była to klasa uniwersalana. A że pobieranie z interntu
             zawsze takie samo, tylko różne są treści, to jako parametr dodaję obiekt implementujący
             initerfejs 'ClientRestowy'. Posiada on (interfejs) dwie metody, używane w logice klasy
-            'DziennikRestClient' zajmującej się miesem obsługi żądania.
+            'RestProccessor' zajmującej się miesem obsługi żądania.
          */
-        new DziennikRestClient(new ClientRestowyUstawPrzeczytana(this)).execute(); //todo: dalsza praca!
+        new RestProccessor(new ClientRestowyUstawPrzeczytana(this)).execute(); //todo: dalsza praca!
 
         textViewTresc.setText(otwartaWiadomosc.getTresc());
-
     }
 
     private void ustalKoloryKomponentow() {
@@ -80,18 +79,6 @@ public class PodgladWiadomosciActivity extends Activity {
 
     public TextView getTextViewTresc() {
         return textViewTresc;
-    }
-
-    public void setTextViewTresc(TextView textViewTresc) {
-        this.textViewTresc = textViewTresc;
-    }
-
-    public Wiadomosc getOtwartaWiadomosc() {
-        return otwartaWiadomosc;
-    }
-
-    public void setOtwartaWiadomosc(Wiadomosc otwartaWiadomosc) {
-        this.otwartaWiadomosc = otwartaWiadomosc;
     }
 }
 

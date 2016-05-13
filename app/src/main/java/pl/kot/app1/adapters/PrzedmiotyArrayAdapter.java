@@ -18,33 +18,46 @@ import pl.kot.app1.service.PrzedmiotyService;
  */
 public class PrzedmiotyArrayAdapter extends ArrayAdapter<Przedmiot> {
     private final Context context;
-    private static  List<Przedmiot> przedmioty;
-
-    static {
-        przedmioty = new PrzedmiotyService().generujPrzedmioty();
-    }
+    private List<Przedmiot> przedmioty;
 
     public PrzedmiotyArrayAdapter(Context context) {
-        super(context, R.layout.przedmioty_list_view, przedmioty);
+        super(context, R.layout.przedmioty_list_view);
+
+        inicjujPrzedmioty();
+
+        super.addAll(przedmioty);
         this.context = context;
+    }
+
+    private void inicjujPrzedmioty() {
+        przedmioty = new PrzedmiotyService().generujPrzedmioty();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        final Przedmiot przedmiot = przedmioty.get(position);
+        final Przedmiot przedmiotDataObject = przedmioty.get(position);
 
-        View rowView = inflater.inflate(R.layout.przedmioty_list_view, parent, false);
+        // Check if an existing view is being reused, otherwise inflate the view
+        if (convertView == null) {
+            convertView = inflater.inflate(R.layout.przedmioty_list_view, parent, false);
+        }
+
+        inicjujKomponenty(przedmiotDataObject, convertView);
+
+        return convertView;
+    }
+
+    private void inicjujKomponenty(Przedmiot przedmiot, View rowView) {
         TextView textViewNazwaPrzedmiotu = (TextView) rowView.findViewById(R.id.textViewNadawcaWiadomosci);
         TextView textViewLogoPrzedmiotu = (TextView) rowView.findViewById(R.id.logo);
         TextView textViewListaOcen = (TextView) rowView.findViewById(R.id.oceny);
+
         textViewNazwaPrzedmiotu.setText(przedmiot.getNazwaPrzedmiotu());
         textViewLogoPrzedmiotu.setText(String.valueOf(przedmiot.getNazwaPrzedmiotu().charAt(0)));
         textViewListaOcen.setText(przedmiot.getListaOcen());
 
         System.out.println(przedmiot.getNazwaPrzedmiotu());
-
-        return rowView;
     }
 }
