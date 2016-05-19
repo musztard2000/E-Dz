@@ -11,12 +11,13 @@ package pl.kot.app1.rest;
  * Created by Damian on 24/04/2016.
  */
 public interface ClientRestowy {
-    String URL_UCZNIOWIE = "http://10.0.2.2:8080/webservices/webapi/uczniowie";
-    String URL_OPIEKUN = "http://10.0.2.2:8080/webservices/webapi/uczniowie/opiekun";
+    String URL_UCZNIOWIE = "http://192.168.0.11:8080/webservices/webapi/uczniowie";
+    String URL_OPIEKUN = "http://192.168.0.11:8080/webservices/webapi/uczniowie/opiekun";
 
     String getRestResourceURL();
 
     /**
+     *
      *
      * @param inputText - Odpowiedź na request w formacie JSON.
      *                  Implementacje tej metody będą przede wszystkim
