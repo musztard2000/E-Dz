@@ -68,7 +68,7 @@ public class PodgladWiadomosciActivity extends Activity {
          */
         new RestProccessor(new ClientRestowyUstawPrzeczytana(this)).execute(); //todo: dalsza praca!
 
-        textViewTresc.setText(otwartaWiadomosc.getTresc());
+  //      textViewTresc.setText(otwartaWiadomosc.getTresc());
     }
 
     private void ustalKoloryKomponentow() {

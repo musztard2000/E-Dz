@@ -11,9 +11,15 @@ package pl.kot.app1.rest;
  * Created by Damian on 24/04/2016.
  */
 public interface ClientRestowy {
-    String URL_UCZNIOWIE = "http://192.168.0.11:8080/webservices/webapi/uczniowie";
-    String URL_OPIEKUN = "http://192.168.0.11:8080/webservices/webapi/uczniowie/opiekun";
+    String URL_UCZNIOWIE = "http://192.168.1.18:8080/webservices/webapi/uczniowie";
+    String URL_OPIEKUN = "http://192.168.1.18:8080/webservices/webapi/uczniowie/opiekun";
+    String URL_LOGOWANIE = "http://192.168.1.18:8080/webservices/webapi/dziennik/logowanie";
 
+    /**
+     *
+     * @return - Zwraca jedną ze stałych zadeklarowanych w interfejsie, które
+     *          określają adresy do resource'ów po stronie serwera.
+     */
     String getRestResourceURL();
 
     /**
