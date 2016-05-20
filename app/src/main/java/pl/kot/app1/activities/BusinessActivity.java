@@ -13,7 +13,8 @@ import android.widget.TextView;
 import pl.kot.app1.R;
 import pl.kot.app1.adapters.PrzedmiotyArrayAdapter;
 import pl.kot.app1.adapters.WiadomosciArrayAdapter;
-import pl.kot.app1.model.Wiadomosc;
+import pl.kot.app1.rest.model.classes.OdpowiedzNaLogowanie;
+import pl.kot.app1.rest.model.classes.Wiadomosc;
 
 /**
  * Jest to activity które uruchamia się po udanym logowaniu.
@@ -96,7 +97,14 @@ public class BusinessActivity extends Activity{
 
     private void wypelnijListViewWiadomosci() {
         ListView wiadomosciListView = (ListView) findViewById(R.id.listViewWiadomosci);
-        wiadomosciListView.setAdapter(new WiadomosciArrayAdapter(this));
+
+        /*
+        ten obiekt to rezultat udanego zalogowania.
+        Zawiera wszystkie dane do działania aplikacji.
+         */
+        final OdpowiedzNaLogowanie odpowiedzNaLogowanie = (OdpowiedzNaLogowanie) getIntent().getExtras().getSerializable("ODPOWIEDZ_NA_LOGOWANIE");
+
+        wiadomosciListView.setAdapter(new WiadomosciArrayAdapter(this, odpowiedzNaLogowanie));
 
         dodajListenerPodgladuAktualnieWybranejWiadomosci(wiadomosciListView);
     }

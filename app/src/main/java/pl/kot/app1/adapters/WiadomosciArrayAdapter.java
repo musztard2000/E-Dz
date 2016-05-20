@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Locale;
 
 import pl.kot.app1.R;
-import pl.kot.app1.model.Wiadomosc;
-import pl.kot.app1.service.WiadomosciService;
+import pl.kot.app1.rest.model.classes.OdpowiedzNaLogowanie;
+import pl.kot.app1.rest.model.classes.Wiadomosc;
 
 /**
  * Created by Damian on 20/04/2016.
@@ -21,23 +21,29 @@ import pl.kot.app1.service.WiadomosciService;
 public class WiadomosciArrayAdapter extends ArrayAdapter<Wiadomosc> {
 
     private final Context context;
+    private OdpowiedzNaLogowanie odpowiedzNaLogowanie;
     private List<Wiadomosc> listaWiadomosci;
 
     private final String DATE_PATTERN = "yyyy-MM-dd HH:mm";
     private final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat(DATE_PATTERN, new Locale("pl", "PL"));
 
-    public WiadomosciArrayAdapter(Context context) {
+    public WiadomosciArrayAdapter(Context context, OdpowiedzNaLogowanie odpowiedzNaLogowanie) {
         super(context, R.layout.wiadomosci_list_view);
+
+        this.odpowiedzNaLogowanie = odpowiedzNaLogowanie;
 
         inicjujWiadomosci();
 
+        /*
+        Kolejność ma znaczenie, nie możemy wywołać .addAll na pustej kolekcji.
+         */
         super.addAll(listaWiadomosci);
 
         this.context = context;
     }
 
     private void inicjujWiadomosci() {
-        listaWiadomosci = new WiadomosciService().generujWiadmosci();
+        listaWiadomosci = odpowiedzNaLogowanie.getWiadomosci();
     }
 
     @Override
@@ -64,6 +70,6 @@ public class WiadomosciArrayAdapter extends ArrayAdapter<Wiadomosc> {
 
         textViewNadawca.setText(nazwaPrzedmiotu.getNadawca());
         textViewTemat.setText(nazwaPrzedmiotu.getTemat());
-        textViewData.setText(SIMPLE_DATE_FORMAT.format(nazwaPrzedmiotu.getDataWyslania()));
+        textViewData.setText(SIMPLE_DATE_FORMAT.format(nazwaPrzedmiotu.getDataWydarzenia()));
     }
 }

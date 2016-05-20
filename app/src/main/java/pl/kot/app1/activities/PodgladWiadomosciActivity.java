@@ -2,6 +2,7 @@ package pl.kot.app1.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.widget.TextView;
 
@@ -9,9 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import pl.kot.app1.R;
-import pl.kot.app1.model.Wiadomosc;
-import pl.kot.app1.rest.RestProccessor;
-import pl.kot.app1.rest.clients.ClientRestowyUstawPrzeczytana;
+import pl.kot.app1.rest.model.classes.Wiadomosc;
 
 /**
  * Created by Damian on 22/04/2016.
@@ -55,20 +54,13 @@ public class PodgladWiadomosciActivity extends Activity {
     private void ustalZawartoscKomponentowZOtwartejWiadomosci(Wiadomosc otwartaWiadomosc) {
         textViewNadawca.setText(otwartaWiadomosc.getNadawca());
         textViewTemat.setText(otwartaWiadomosc.getTemat());
-        textViewData.setText(SIMPLE_DATE_FORMAT.format(otwartaWiadomosc.getDataWyslania()));
+        textViewData.setText(SIMPLE_DATE_FORMAT.format(otwartaWiadomosc.getDataWydarzenia()));
 
         /*
-            co się dzieje:
-            - w moim activity tworzę obiekt klasy RestProccessor, i wykonuję na nim metodę
-            execute(). Powyższy obiekt rozszerza klasę 'AsyncTask', typową do takiej pracy
-            w androidzie. Chciałem dlatego by była to klasa uniwersalana. A że pobieranie z interntu
-            zawsze takie samo, tylko różne są treści, to jako parametr dodaję obiekt implementujący
-            initerfejs 'ClientRestowy'. Posiada on (interfejs) dwie metody, używane w logice klasy
-            'RestProccessor' zajmującej się miesem obsługi żądania.
+        poniżej korzystam ze statycznej metody .fromHtml( ...trescHtml...) klasy HTML
+        która jest na możliwości TextView konwertowania jak się da.
          */
-        new RestProccessor(new ClientRestowyUstawPrzeczytana(this)).execute(); //todo: dalsza praca!
-
-  //      textViewTresc.setText(otwartaWiadomosc.getTresc());
+        textViewTresc.setText(Html.fromHtml(otwartaWiadomosc.getTresc()));
     }
 
     private void ustalKoloryKomponentow() {
