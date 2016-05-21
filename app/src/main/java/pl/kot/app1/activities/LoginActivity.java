@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 System.out.println("click");
 
-//                zaloguj();
+   //            zalogujMOCKOWO();
 
                 zalogujPrzezREST();
             }
@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         textViewBlednyLoginLubHaslo = (TextView) findViewById(R.id.textViewBlednyLoginLubHaaslo);
     }
 
-    public void zaloguj() {
+    public void zalogujMOCKOWO() {
         final String login = editTextLogin.getText().toString();
         final String pass = editTextPass.getText().toString();
 

@@ -11,6 +11,11 @@ public class Przedmiot {
         this.nazwaPrzedmiotu = nazwaPrzedmiotu;
         this.listaOcen = listaOcen;
     }
+
+    public Przedmiot() {
+
+    }
+
     public String getNazwaPrzedmiotu() {
         return nazwaPrzedmiotu;
     }

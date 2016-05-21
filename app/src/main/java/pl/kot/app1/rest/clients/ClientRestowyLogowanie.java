@@ -56,12 +56,12 @@ public class ClientRestowyLogowanie implements ClientRestowy {
     }
 
     @Override
-    public void proccessView(String inputText) {
-        if (inputText != null && !inputText.isEmpty()) {
+    public void proccessView(String jsonResult) {
+        if (jsonResult != null && !jsonResult.isEmpty()) {
 
             Intent intent = new Intent(context, BusinessActivity.class);
 
-            zacznijObslugeJSONowejTresciIPrzekazDoNowegoActivity(inputText, intent);
+            zacznijObslugeJSONowejTresciIPrzekazDoNowegoActivity(jsonResult, intent);
             czyscStroneLogowaniaIOtworzBusinessActivity(intent);
         } else {
             ((LoginActivity) context).getTextViewBlednyLoginLubHaslo().setText("Logowanie nieudane. Błędny login lub hasło.");

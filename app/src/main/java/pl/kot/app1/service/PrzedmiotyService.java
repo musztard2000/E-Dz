@@ -1,34 +1,57 @@
 package pl.kot.app1.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import pl.kot.app1.model.Przedmiot;
+import pl.kot.app1.rest.model.classes.OcenaZPrzedmiotu;
 
 /**
  * Created by Damian on 20/04/2016.
+ *
+ * Jest to serwis, który wykonuje transofmacje obiektów typu 'OcenaZPrzedmiotu'
+ * do obiektów klasy 'Przedmiot'. Klasa 'Przedmiot' powstała na początku tworzenia
+ * aplikacji i została ładnie podpięta z widokami i adapterami. Dlatego, nie
+ * chciałem jej usuwać, tylko zmieniłem implementację metody generującej
+ * serwis, by dalej korzystać z mądrze przemyślanych obiektów, dobrze wpiętych w widoki.
  */
 public class PrzedmiotyService {
 
-    private final String OCENY= "3, 4, 4+, 5-, 3, 3";
+    public List<Przedmiot> generujPrzedmioty(List<OcenaZPrzedmiotu> ocenyZPrzedmiotow) {
+        return transformOcenyZPrzedmiotowToPrzedmioty(ocenyZPrzedmiotow);
+    }
 
-    public List<Przedmiot> generujPrzedmioty() {
-        List<Przedmiot> przedmioty = new ArrayList<>();
-        przedmioty.add(new Przedmiot("Język polski", OCENY));
-        przedmioty.add(new Przedmiot("Matematyka", OCENY));
-        przedmioty.add(new Przedmiot("Biologia", OCENY));
-        przedmioty.add(new Przedmiot("Chemia", OCENY));
-        przedmioty.add(new Przedmiot("Plastyka", OCENY));
-        przedmioty.add(new Przedmiot("Muzyka", OCENY));
-        przedmioty.add(new Przedmiot("Wychowanie fizyczne", OCENY));
-        przedmioty.add(new Przedmiot("Religia / Etyka", OCENY));
-        przedmioty.add(new Przedmiot("Geografia", OCENY));
-        przedmioty.add(new Przedmiot("Historia", OCENY));
-        przedmioty.add(new Przedmiot("Informatyka", OCENY));
-        przedmioty.add(new Przedmiot("Wiedza o społeczeństwie", OCENY));
-        przedmioty.add(new Przedmiot("Przysposobienie obronne", OCENY));
-        przedmioty.add(new Przedmiot("Podstawy przedsiębiorczości", OCENY));
+    private List<Przedmiot> transformOcenyZPrzedmiotowToPrzedmioty(List<OcenaZPrzedmiotu> ocenyZPrzedmiotow) {
+        List<Przedmiot> przedmiotyWynikowe = new ArrayList<>();
 
-        return przedmioty;
+        final Set<String> nazwyPrzedmiotow = new HashSet<>();
+        for (OcenaZPrzedmiotu o : ocenyZPrzedmiotow) {
+            nazwyPrzedmiotow.add(o.getNazwaPrzedmiotu());
+        }
+
+        for (String nazwaPrzedmiotu : nazwyPrzedmiotow) {
+            Przedmiot przedmiot = new Przedmiot();
+            przedmiot.setNazwaPrzedmiotu(nazwaPrzedmiotu);
+
+            String oceny = "";
+            for (OcenaZPrzedmiotu ocenaZPrzedmiotu : ocenyZPrzedmiotow) {
+                if (nazwaPrzedmiotu.equals(ocenaZPrzedmiotu.getNazwaPrzedmiotu())) {
+                    final String ocenaZPrzecinkiem = ocenaZPrzedmiotu.getWartoscOceny() + ", ";
+                    oceny += ocenaZPrzecinkiem;
+                }
+            }
+
+            if (!oceny.isEmpty()) {
+                oceny = oceny.substring(0, oceny.length() - 2);
+            }
+
+            przedmiot.setListaOcen(oceny);
+
+            przedmiotyWynikowe.add(przedmiot);
+        }
+
+        return przedmiotyWynikowe;
     }
 }

@@ -83,7 +83,12 @@ public class BusinessActivity extends Activity{
 
     private void wypelnijListViewOceny() {
         ListView przedmiotyListView = (ListView) findViewById(R.id.listViewPrzedmioty);
-        przedmiotyListView.setAdapter(new PrzedmiotyArrayAdapter(this));
+        /*
+        ten obiekt to rezultat udanego zalogowania.
+        Zawiera wszystkie dane do działania aplikacji.
+         */
+        final OdpowiedzNaLogowanie odpowiedzNaLogowanie = (OdpowiedzNaLogowanie) getIntent().getExtras().getSerializable("ODPOWIEDZ_NA_LOGOWANIE");
+        przedmiotyListView.setAdapter(new PrzedmiotyArrayAdapter(this, odpowiedzNaLogowanie));
     }
 
     private void przygotujTabWiadomosci(TabHost host) {

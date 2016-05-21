@@ -25,7 +25,7 @@ public interface ClientRestowy {
     /**
      *
      *
-     * @param inputText - Odpowiedź na request w formacie JSON.
+     * @param jsonResult - Odpowiedź na request w formacie JSON.
      *                  Implementacje tej metody będą przede wszystkim
      *                  (w zwiazku z tym, że klasy implementujące ten
      *                  interfejs będą posiadały obiekt 'Context')
@@ -35,6 +35,6 @@ public interface ClientRestowy {
      *                  z kolei do odświeżania widoku aplikacji po zakończonych operacjach
      *                  w wątku.
      */
-    void proccessView(String inputText);
+    void proccessView(String jsonResult);
 
 }

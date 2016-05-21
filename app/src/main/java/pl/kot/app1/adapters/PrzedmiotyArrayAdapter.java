@@ -11,6 +11,7 @@ import java.util.List;
 
 import pl.kot.app1.R;
 import pl.kot.app1.model.Przedmiot;
+import pl.kot.app1.rest.model.classes.OdpowiedzNaLogowanie;
 import pl.kot.app1.service.PrzedmiotyService;
 
 /**
@@ -19,10 +20,11 @@ import pl.kot.app1.service.PrzedmiotyService;
 public class PrzedmiotyArrayAdapter extends ArrayAdapter<Przedmiot> {
     private final Context context;
     private List<Przedmiot> przedmioty;
+    private OdpowiedzNaLogowanie odpowiedzNaLogowanie;
 
-    public PrzedmiotyArrayAdapter(Context context) {
+    public PrzedmiotyArrayAdapter(Context context, OdpowiedzNaLogowanie odpowiedzNaLogowanie) {
         super(context, R.layout.przedmioty_list_view);
-
+        this.odpowiedzNaLogowanie = odpowiedzNaLogowanie;
         inicjujPrzedmioty();
 
         super.addAll(przedmioty);
@@ -30,7 +32,7 @@ public class PrzedmiotyArrayAdapter extends ArrayAdapter<Przedmiot> {
     }
 
     private void inicjujPrzedmioty() {
-        przedmioty = new PrzedmiotyService().generujPrzedmioty();
+        przedmioty = new PrzedmiotyService().generujPrzedmioty(odpowiedzNaLogowanie.getOceny());
     }
 
     @Override
