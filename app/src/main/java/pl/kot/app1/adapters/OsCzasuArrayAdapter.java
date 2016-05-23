@@ -2,6 +2,8 @@ package pl.kot.app1.adapters;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,12 +24,30 @@ import pl.kot.app1.service.WydarzeniaService;
  * Created by Damian on 21/05/2016.
  */
 public class OsCzasuArrayAdapter extends ArrayAdapter<Wydarzenie> {
-    private final Context context;
-    private List<Wydarzenie> wydarzenia;
-    private OdpowiedzNaLogowanie odpowiedzNaLogowanie;
+    private final int MAKSYMALNA_DLUGOSC_TEMATU_WIADOMOSCI_WYDARZENIA = 30;
+    private final int MAKSYMALNA_DLUGOSC_TRESCI_WIAOMOSCI_WYDARZENIA = 50;
+    private final String TRZY_KROPKI = "...";
 
     private final String DATE_PATTERN = "yyyy-MM-dd HH:mm";
     private final SimpleDateFormat SIMPLE_DATE_FORMAT = new SimpleDateFormat(DATE_PATTERN, new Locale("pl", "PL"));
+
+    private final String TEMAT_WIADOMOSCI = "Temat:";
+    private final String TRESC_WIADOMOSCI = "Treść:";
+    private final String WARTOSC_OCENY = "Wartość:";
+    private final String ZA_CO_OCENA = "Za co:";
+    private final String HEADER_OCENY = "cena";
+    private final String HEADER_WIADOMOSCI = "iadomość";
+
+    private final Context context;
+    private List<Wydarzenie> wydarzenia;
+    private OdpowiedzNaLogowanie odpowiedzNaLogowanie;
+    private TextView textViewInicjalWydarzenia;
+    private TextView textViewHeaderWydarzenia;
+    private TextView textViewDataWydarzenia;
+    private TextView textViewNazwaWydarzenia;
+    private TextView textViewNazwaWydarzeniaLabel;
+    private TextView textViewZawartoscWydarzenia;
+    private TextView textViewZawartoscWydarzeniaLabel;
 
 
     public OsCzasuArrayAdapter(Context context, OdpowiedzNaLogowanie odpowiedzNaLogowanie) {
@@ -38,6 +58,7 @@ public class OsCzasuArrayAdapter extends ArrayAdapter<Wydarzenie> {
         super.addAll(wydarzenia);
         this.context = context;
     }
+
     private void inicjujWydarzenia() {
         wydarzenia = new WydarzeniaService().generujWydarzenia(odpowiedzNaLogowanie);
         System.out.println("wydarzenia: " + wydarzenia);
@@ -60,40 +81,85 @@ public class OsCzasuArrayAdapter extends ArrayAdapter<Wydarzenie> {
     }
 
     private void inicjujKomponentyIPowiazZAtrybutamiModeluWydarzenia(Wydarzenie wydarzenie, View rowView) {
-        TextView textViewInicjalWydarzenia = (TextView) rowView.findViewById(R.id.typWydarzeniaTextView);
-        TextView textViewHeaderWydarzenia = (TextView) rowView.findViewById(R.id.headerText);
+        inicjujKomponentyWidokou(rowView);
 
-        TextView textViewDataWydarzenia = (TextView) rowView.findViewById(R.id.dataWydarzeniaTextView);
+        powiazAtrybutyWidokuZModelemWydarzenia(wydarzenie);
 
-        TextView textViewNazwaWydarzenia = (TextView) rowView.findViewById(R.id.nazwaWydarzeniaText);
-        TextView textViewNazwaWydarzeniaLabel = (TextView) rowView.findViewById(R.id.nazwaWydarzeniaLabel);
+        Log.i("WYDARZENIE: ",  wydarzenie.getNazwaWydarzenia());
+    }
 
-        TextView textViewZawartoscWydarzenia = (TextView) rowView.findViewById(R.id.zawartoscWydarzeniaText);
-        TextView textViewZawartoscWydarzeniaLabel = (TextView) rowView.findViewById(R.id.zawartoscWydarzeniaLabel);
+    private void inicjujKomponentyWidokou(View rowView) {
+        textViewInicjalWydarzenia = (TextView) rowView.findViewById(R.id.typWydarzeniaTextView);
+        textViewHeaderWydarzenia = (TextView) rowView.findViewById(R.id.headerText);
 
+        textViewDataWydarzenia = (TextView) rowView.findViewById(R.id.dataWydarzeniaTextView);
+
+        textViewNazwaWydarzenia = (TextView) rowView.findViewById(R.id.nazwaWydarzeniaText);
+        textViewNazwaWydarzeniaLabel = (TextView) rowView.findViewById(R.id.nazwaWydarzeniaLabel);
+
+        textViewZawartoscWydarzenia = (TextView) rowView.findViewById(R.id.zawartoscWydarzeniaText);
+        textViewZawartoscWydarzeniaLabel = (TextView) rowView.findViewById(R.id.zawartoscWydarzeniaLabel);
+    }
+
+    private void powiazAtrybutyWidokuZModelemWydarzenia(Wydarzenie wydarzenie) {
         if(wydarzenie.getTypWydarzenia().startsWith("O")) {
-            textViewInicjalWydarzenia.setText("O");
-            textViewHeaderWydarzenia.setText("cena");
-            textViewNazwaWydarzeniaLabel.setText("Wartość:");
-            textViewZawartoscWydarzeniaLabel.setText("Za co:");
-            textViewNazwaWydarzenia.setTypeface(null, Typeface.BOLD);
+            powiazAtrybutyWidokuZWydarzeniemTypuOcena(wydarzenie);
         } else {
-            textViewInicjalWydarzenia.setText("W");
-            textViewHeaderWydarzenia.setText("iadomość");
-            textViewNazwaWydarzeniaLabel.setText("Temat:");
-            textViewZawartoscWydarzeniaLabel.setText("Treść:");
-            textViewNazwaWydarzenia.setTypeface(null, Typeface.NORMAL);
+            powiazAtrybutyWidokuZWydarzeniemTypuWiadomosc(wydarzenie);
         }
 
-        textViewNazwaWydarzenia.setText(wydarzenie.getNazwaWydarzenia());
-        textViewZawartoscWydarzenia.setText(wydarzenie.getZawartoscWydarzenia());
+        powiazAtrybutDatyWidokuDlaWydarzenia(wydarzenie);
+    }
 
+    private void powiazAtrybutyWidokuZWydarzeniemTypuOcena(Wydarzenie wydarzenie) {
+        textViewInicjalWydarzenia.setText("O");
+        textViewHeaderWydarzenia.setText(HEADER_OCENY);
+        textViewNazwaWydarzeniaLabel.setText(WARTOSC_OCENY);
+        textViewZawartoscWydarzeniaLabel.setText(ZA_CO_OCENA);
+        textViewNazwaWydarzenia.setText(wydarzenie.getNazwaWydarzenia());
+        textViewNazwaWydarzenia.setTypeface(null, Typeface.BOLD);
+        textViewZawartoscWydarzenia.setText(wydarzenie.getZawartoscWydarzenia());
+    }
+
+    private void powiazAtrybutyWidokuZWydarzeniemTypuWiadomosc(Wydarzenie wydarzenie) {
+        textViewInicjalWydarzenia.setText("W");
+        textViewHeaderWydarzenia.setText(HEADER_WIADOMOSCI);
+        textViewNazwaWydarzeniaLabel.setText(TEMAT_WIADOMOSCI);
+        textViewZawartoscWydarzeniaLabel.setText(TRESC_WIADOMOSCI);
+        textViewNazwaWydarzenia.setTypeface(null, Typeface.NORMAL);
+
+        skrocDlugoscTematuWiadomosciJesliTrzeba(wydarzenie);
+        skrocDlugoscTresciWiadomosciJesliTrzeba(wydarzenie);
+    }
+
+    private void skrocDlugoscTematuWiadomosciJesliTrzeba(Wydarzenie wydarzenie) {
+        if (wydarzenie.getNazwaWydarzenia().length() > MAKSYMALNA_DLUGOSC_TEMATU_WIADOMOSCI_WYDARZENIA) {
+            String skroconaNazwaWydarzenia = wydarzenie.getNazwaWydarzenia().substring(0, 30);
+            skroconaNazwaWydarzenia += TRZY_KROPKI;
+            textViewNazwaWydarzenia.setText(skroconaNazwaWydarzenia);
+        } else {
+            textViewNazwaWydarzenia.setText(wydarzenie.getNazwaWydarzenia());
+        }
+    }
+
+    private void skrocDlugoscTresciWiadomosciJesliTrzeba(Wydarzenie wydarzenie) {
+        Spanned htmlowaTrescWiadomosci = Html.fromHtml(wydarzenie.getZawartoscWydarzenia());
+        if (htmlowaTrescWiadomosci.length() > MAKSYMALNA_DLUGOSC_TRESCI_WIAOMOSCI_WYDARZENIA) {
+            CharSequence charSequence = htmlowaTrescWiadomosci.subSequence(0, 50);
+            String skroconaTrescWiadomosci = charSequence.toString();
+            skroconaTrescWiadomosci += TRZY_KROPKI;
+            textViewZawartoscWydarzenia.setText(skroconaTrescWiadomosci);
+        } else {
+            textViewZawartoscWydarzenia.setText(htmlowaTrescWiadomosci);
+        }
+    }
+
+    private void powiazAtrybutDatyWidokuDlaWydarzenia(Wydarzenie wydarzenie) {
         if (wydarzenie.getDataWydarzenia() != null) {
             textViewDataWydarzenia.setText(SIMPLE_DATE_FORMAT.format(wydarzenie.getDataWydarzenia()));
         } else {
             textViewDataWydarzenia.setText("");
         }
-        Log.i("WYDARZENIE: ",  wydarzenie.getNazwaWydarzenia());
     }
 
 }

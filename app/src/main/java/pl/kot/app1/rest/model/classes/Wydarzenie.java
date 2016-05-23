@@ -6,9 +6,27 @@ import java.util.Date;
  * Created by Damian on 21/05/2016.
  */
 public class Wydarzenie {
+
+    /**
+     * Albo OCENA, albo WIADOMOSC.
+     */
     String typWydarzenia;
+
+    /**
+     * Dla wydarzenia typu OCENA = wartosc oceny
+     * Dla wydarzenia typu WIADOMOSC = temat wiadomosci
+     */
     String nazwaWydarzenia;
+
+    /**
+     * Dla wydarzenia typu OCENA = za co ocena
+     * Dla wydarzenia typu WIADOMOSC = treść wiadomosci
+     */
     String zawartoscWydarzenia;
+
+    /**
+     * Data wydarzenia.
+     */
     Date dataWydarzenia;
 
     public Wydarzenie(String typWydarzenia, String nazwaWydarzenia, String zawartoscWydarzenia) {
