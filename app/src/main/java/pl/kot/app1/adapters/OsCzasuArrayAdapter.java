@@ -58,7 +58,7 @@ public class OsCzasuArrayAdapter extends ArrayAdapter<Wydarzenie> {
         TextView textViewTypWydarzenia = (TextView) rowView.findViewById(R.id.typWydarzeniaTextView);
 
         textViewNazwaWydarzenia.setText(wydarzenie.getNazwaWydarzenia());
-        textViewOpisWydarzenia.setText(String.valueOf(wydarzenie.getOpisWydarzenia()));
+        textViewOpisWydarzenia.setText(String.valueOf(wydarzenie.getZawartoscWydarzenia()));
         textViewTypWydarzenia.setText(String.valueOf(wydarzenie.getTypWydarzenia().charAt(0)));
 
         Log.i("WYDARZENIE: ",  wydarzenie.getNazwaWydarzenia());
