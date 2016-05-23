@@ -11,6 +11,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import pl.kot.app1.R;
+import pl.kot.app1.adapters.OsCzasuArrayAdapter;
 import pl.kot.app1.adapters.PrzedmiotyArrayAdapter;
 import pl.kot.app1.adapters.WiadomosciArrayAdapter;
 import pl.kot.app1.rest.model.classes.OdpowiedzNaLogowanie;
@@ -69,8 +70,19 @@ public class BusinessActivity extends Activity{
         tabOsiCzasu.setContent(R.id.tabOsiCzasu);
         tabOsiCzasu.setIndicator("Oś czasu");
         host.addTab(tabOsiCzasu);
+        wypelnijListViewOsiCzasu();
     }
 
+    private void wypelnijListViewOsiCzasu() {
+        ListView osCzasuListView = (ListView) findViewById(R.id.listViewTimeline);
+
+        /*
+        ten obiekt to rezultat udanego zalogowania.
+        Zawiera wszystkie dane do działania aplikacji.
+         */
+        final OdpowiedzNaLogowanie odpowiedzNaLogowanie = (OdpowiedzNaLogowanie) getIntent().getExtras().getSerializable("ODPOWIEDZ_NA_LOGOWANIE");
+        osCzasuListView.setAdapter(new OsCzasuArrayAdapter(this, odpowiedzNaLogowanie));
+    }
 
     private void przygotujTabOcen(TabHost host) {
         TabHost.TabSpec tabOcen = host.newTabSpec("Oceny");
