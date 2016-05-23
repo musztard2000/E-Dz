@@ -1,6 +1,7 @@
 package pl.kot.app1.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import pl.kot.app1.rest.model.classes.OdpowiedzNaLogowanie;
@@ -14,8 +15,8 @@ public class WydarzeniaService {
 
         List<Wydarzenie> wydarzenies = new ArrayList<>();
         Wydarzenie wydarzenie = new Wydarzenie("Ocena", "5", "za sprawdzian");
-        Wydarzenie wydarzenie1 = new Wydarzenie("Wiadomosc", "Zaproszenia na...", "dyrektor");
-        Wydarzenie wydarzenie2 = new Wydarzenie("Wiadomosc", "Zaproszenia na...", "dyrektor");
+        Wydarzenie wydarzenie1 = new Wydarzenie("Wiadomosc", "Zaproszenia na...", "dyrektor", new Date(0l));
+        Wydarzenie wydarzenie2 = new Wydarzenie("Wiadomosc", "Zaproszenia na...", "dyrektor", new Date());
         wydarzenies.add(wydarzenie);
         wydarzenies.add(wydarzenie1);
         wydarzenies.add(wydarzenie2);

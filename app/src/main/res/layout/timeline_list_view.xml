@@ -7,32 +7,30 @@
 
     <TextView
         android:id="@+id/typWydarzeniaTextView"
-        android:layout_width="40dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="0dp"
-        android:textSize="46dp"
-        android:textAlignment="textEnd"
-        android:text="W"
+        android:textSize="48dp"
+        android:textAlignment="textStart"
+        android:text="O"
         android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/headerText">
+        android:layout_centerHorizontal="true">
     </TextView>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="iadomość"
+        android:text="cena"
         android:id="@+id/headerText"
-        android:layout_above="@+id/nazwaWydarzeniaText"
-        android:layout_toStartOf="@+id/dataTextView" />
+        android:layout_alignBottom="@+id/typWydarzeniaTextView"
+        android:layout_toEndOf="@+id/typWydarzeniaTextView" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Data: 22.04.2016"
-        android:id="@+id/dataTextView"
+        android:id="@+id/dataWydarzeniaTextView"
         android:layout_alignTop="@+id/typWydarzeniaTextView"
         android:layout_alignParentEnd="true" />
 
