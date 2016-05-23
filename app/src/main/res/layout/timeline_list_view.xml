@@ -1,40 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:padding="5dp"
-    android:minHeight="80dp">
+    android:minHeight="140dp">
 
     <TextView
         android:id="@+id/typWydarzeniaTextView"
-        android:layout_width="50dp"
+        android:layout_width="40dp"
         android:layout_height="50dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginRight="0dp"
         android:textSize="46dp"
-        >
+        android:textAlignment="textEnd"
+        android:text="W"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/headerText">
     </TextView>
 
     <TextView
-        android:id="@+id/nazwaWydarzeniaTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@+id/nazwaWydarzeniaTextView"
-        android:textSize="20dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="iadomość"
+        android:id="@+id/headerText"
+        android:layout_above="@+id/nazwaWydarzeniaText"
+        android:layout_toStartOf="@+id/dataTextView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Data: 22.04.2016"
+        android:id="@+id/dataTextView"
+        android:layout_alignTop="@+id/typWydarzeniaTextView"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Temat:"
+        android:id="@+id/nazwaWydarzeniaLabel"
+        android:layout_below="@+id/typWydarzeniaTextView"
+        android:layout_alignParentStart="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Treść:"
+        android:id="@+id/zawartoscWydarzeniaLabel"
+        android:maxWidth="40dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/nazwaWydarzeniaLabel"
+        android:layout_alignParentBottom="false"
+        android:layout_toStartOf="@+id/nazwaWydarzeniaText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Zaproszenie na ..."
+        android:id="@+id/nazwaWydarzeniaText"
         android:layout_alignParentEnd="true"
-        android:layout_toEndOf="@+id/logo">
-    </TextView>
+        android:layout_toEndOf="@+id/nazwaWydarzeniaLabel"
+        android:layout_above="@+id/zawartoscWydarzeniaLabel"
+        android:layout_marginTop="10dp" />
 
     <TextView
-        android:id="@+id/opisWydarzenia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@+id/opisWydarzenia"
-        android:textSize="16dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="false"
-        android:layout_toEndOf="@+id/logo">
-    </TextView>
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Treść:Treść:Treść:Treść: Treść: "
+        android:id="@+id/zawartoscWydarzeniaText"
+        android:maxWidth="40dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignTop="@+id/zawartoscWydarzeniaLabel"
+        android:layout_alignStart="@+id/nazwaWydarzeniaText"
+        android:layout_alignParentBottom="false"
+        android:layout_alignEnd="@+id/nazwaWydarzeniaText" />
 
 </RelativeLayout>

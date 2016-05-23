@@ -53,12 +53,12 @@ public class OsCzasuArrayAdapter extends ArrayAdapter<Wydarzenie> {
     }
 
     private void inicjujKomponenty(Wydarzenie wydarzenie, View rowView) {
-        TextView textViewNazwaWydarzenia = (TextView) rowView.findViewById(R.id.nazwaWydarzeniaTextView);
-        TextView textViewOpisWydarzenia = (TextView) rowView.findViewById(R.id.opisWydarzenia);
+//        TextView textViewNazwaWydarzenia = (TextView) rowView.findViewById(R.id.nazwaWydarzeniaTextView);
+//        TextView textViewOpisWydarzenia = (TextView) rowView.findViewById(R.id.opisWydarzenia);
         TextView textViewTypWydarzenia = (TextView) rowView.findViewById(R.id.typWydarzeniaTextView);
 
-        textViewNazwaWydarzenia.setText(wydarzenie.getNazwaWydarzenia());
-        textViewOpisWydarzenia.setText(String.valueOf(wydarzenie.getZawartoscWydarzenia()));
+ //       textViewNazwaWydarzenia.setText(wydarzenie.getNazwaWydarzenia());
+ //       textViewOpisWydarzenia.setText(String.valueOf(wydarzenie.getZawartoscWydarzenia()));
         textViewTypWydarzenia.setText(String.valueOf(wydarzenie.getTypWydarzenia().charAt(0)));
 
         Log.i("WYDARZENIE: ",  wydarzenie.getNazwaWydarzenia());
