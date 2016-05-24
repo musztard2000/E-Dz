@@ -16,6 +16,7 @@ import pl.kot.app1.adapters.PrzedmiotyArrayAdapter;
 import pl.kot.app1.adapters.WiadomosciArrayAdapter;
 import pl.kot.app1.rest.model.classes.OdpowiedzNaLogowanie;
 import pl.kot.app1.rest.model.classes.Wiadomosc;
+import pl.kot.app1.rest.model.classes.Wydarzenie;
 
 /**
  * Jest to activity które uruchamia się po udanym logowaniu.
@@ -82,6 +83,19 @@ public class BusinessActivity extends Activity{
          */
         final OdpowiedzNaLogowanie odpowiedzNaLogowanie = (OdpowiedzNaLogowanie) getIntent().getExtras().getSerializable("ODPOWIEDZ_NA_LOGOWANIE");
         osCzasuListView.setAdapter(new OsCzasuArrayAdapter(this, odpowiedzNaLogowanie));
+        dodajListenerOdznaczaniaNieprzeczytanychWydarzen(osCzasuListView);
+    }
+
+    private void dodajListenerOdznaczaniaNieprzeczytanychWydarzen(ListView wydarzeniaListView) {
+        wydarzeniaListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Wydarzenie aktualneWydazrenie = (Wydarzenie) adapterView.getItemAtPosition(i);
+                aktualneWydazrenie.setCzyPrzeczytane(true);
+                System.out.println("wydarzenie przeczytane o nazwie: " + aktualneWydazrenie.getNazwaWydarzenia());
+                view.setBackgroundColor(-1);
+            }
+        });
     }
 
     private void przygotujTabOcen(TabHost host) {

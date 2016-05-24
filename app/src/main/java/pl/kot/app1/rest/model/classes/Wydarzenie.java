@@ -1,11 +1,12 @@
 package pl.kot.app1.rest.model.classes;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by Damian on 21/05/2016.
  */
-public class Wydarzenie {
+public class Wydarzenie implements Serializable{
 
     /**
      * Albo OCENA, albo WIADOMOSC.
@@ -28,6 +29,14 @@ public class Wydarzenie {
      * Data wydarzenia.
      */
     Date dataWydarzenia;
+
+    /**
+     * Gdy powiadomienie wchodzi do osi czasu po raz pierwszy
+     * ustawione ma flagę na 'false', co skutkuje zmienionym
+     * kolorem komórki, w której jest. Kliknięcie na to wydarzenie
+     * odznacza flagę.
+     */
+    private boolean czyPrzeczytane;
 
     public Wydarzenie(String typWydarzenia, String nazwaWydarzenia, String zawartoscWydarzenia) {
         this.typWydarzenia = typWydarzenia;
@@ -74,5 +83,13 @@ public class Wydarzenie {
 
     public void setDataWydarzenia(Date dataWydarzenia) {
         this.dataWydarzenia = dataWydarzenia;
+    }
+
+    public boolean isCzyPrzeczytane() {
+        return czyPrzeczytane;
+    }
+
+    public void setCzyPrzeczytane(boolean czyPrzeczytane) {
+        this.czyPrzeczytane = czyPrzeczytane;
     }
 }

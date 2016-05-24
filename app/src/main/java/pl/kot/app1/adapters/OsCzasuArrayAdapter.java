@@ -1,6 +1,7 @@
 package pl.kot.app1.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.Html;
 import android.text.Spanned;
@@ -49,6 +50,13 @@ public class OsCzasuArrayAdapter extends ArrayAdapter<Wydarzenie> {
     private TextView textViewZawartoscWydarzenia;
     private TextView textViewZawartoscWydarzeniaLabel;
 
+    /**
+     * ObiektView adaptera osi czasu jest niezbędny
+     * by z innych klas wywoływać jego atrybut zmieniania
+     * tła elementów ListView, przy onclicku.
+     */
+    private View osCzasuConverView;
+
 
     public OsCzasuArrayAdapter(Context context, OdpowiedzNaLogowanie odpowiedzNaLogowanie) {
         super(context, R.layout.timeline_list_view);
@@ -69,10 +77,16 @@ public class OsCzasuArrayAdapter extends ArrayAdapter<Wydarzenie> {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         final Wydarzenie przedmiotDataObject = wydarzenia.get(position);
-
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.timeline_list_view, parent, false);
+            osCzasuConverView = convertView;
+        }
+
+        if (!przedmiotDataObject.isCzyPrzeczytane()) {
+            convertView.setBackgroundColor(Color.parseColor("#b3b3ff"));
+        } else {
+            convertView.setBackgroundColor(-1);
         }
 
         inicjujKomponentyIPowiazZAtrybutamiModeluWydarzenia(przedmiotDataObject, convertView);
@@ -162,4 +176,11 @@ public class OsCzasuArrayAdapter extends ArrayAdapter<Wydarzenie> {
         }
     }
 
+    public List<Wydarzenie> getWydarzenia() {
+        return wydarzenia;
+    }
+
+    public void setWydarzenia(List<Wydarzenie> wydarzenia) {
+        this.wydarzenia = wydarzenia;
+    }
 }
