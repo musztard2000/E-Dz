@@ -1,4 +1,4 @@
-package pl.kot.app1.rest.model.classes;
+package pl.kot.app1.model.classes;
 
 import java.io.Serializable;
 

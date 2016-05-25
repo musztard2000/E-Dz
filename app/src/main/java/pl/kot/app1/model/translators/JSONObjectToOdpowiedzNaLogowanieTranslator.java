@@ -1,4 +1,4 @@
-package pl.kot.app1.rest.model.translators;
+package pl.kot.app1.model.translators;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,10 +11,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import pl.kot.app1.rest.model.classes.OcenaZPrzedmiotu;
-import pl.kot.app1.rest.model.classes.OdpowiedzNaLogowanie;
-import pl.kot.app1.rest.model.classes.Uzytkownik;
-import pl.kot.app1.rest.model.classes.Wiadomosc;
+import pl.kot.app1.model.classes.OcenaZPrzedmiotu;
+import pl.kot.app1.model.classes.OdpowiedzNaLogowanie;
+import pl.kot.app1.model.classes.Uzytkownik;
+import pl.kot.app1.model.classes.Wiadomosc;
 
 /**
  * Created by Damian on 20/05/2016.

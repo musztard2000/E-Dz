@@ -13,8 +13,8 @@ import java.util.Date;
 import pl.kot.app1.activities.BusinessActivity;
 import pl.kot.app1.activities.LoginActivity;
 import pl.kot.app1.rest.ClientRestowy;
-import pl.kot.app1.rest.model.classes.OdpowiedzNaLogowanie;
-import pl.kot.app1.rest.model.translators.JSONObjectToOdpowiedzNaLogowanieTranslator;
+import pl.kot.app1.model.classes.OdpowiedzNaLogowanie;
+import pl.kot.app1.model.translators.JSONObjectToOdpowiedzNaLogowanieTranslator;
 
 /**
  * Created by Damian on 24/04/2016.

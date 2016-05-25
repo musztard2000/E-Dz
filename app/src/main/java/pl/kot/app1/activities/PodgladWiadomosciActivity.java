@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import pl.kot.app1.R;
-import pl.kot.app1.rest.model.classes.Wiadomosc;
+import pl.kot.app1.model.classes.Wiadomosc;
 
 /**
  * Created by Damian on 22/04/2016.

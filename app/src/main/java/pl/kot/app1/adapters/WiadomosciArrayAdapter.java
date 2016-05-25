@@ -12,8 +12,8 @@ import java.util.List;
 import java.util.Locale;
 
 import pl.kot.app1.R;
-import pl.kot.app1.rest.model.classes.OdpowiedzNaLogowanie;
-import pl.kot.app1.rest.model.classes.Wiadomosc;
+import pl.kot.app1.model.classes.OdpowiedzNaLogowanie;
+import pl.kot.app1.model.classes.Wiadomosc;
 
 /**
  * Created by Damian on 20/04/2016.

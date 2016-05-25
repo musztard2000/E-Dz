@@ -10,8 +10,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import pl.kot.app1.R;
-import pl.kot.app1.model.Przedmiot;
-import pl.kot.app1.rest.model.classes.OdpowiedzNaLogowanie;
+import pl.kot.app1.model.classes.Przedmiot;
+import pl.kot.app1.model.classes.OdpowiedzNaLogowanie;
 import pl.kot.app1.service.PrzedmiotyService;
 
 /**

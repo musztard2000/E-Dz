@@ -14,9 +14,9 @@ import pl.kot.app1.R;
 import pl.kot.app1.adapters.OsCzasuArrayAdapter;
 import pl.kot.app1.adapters.PrzedmiotyArrayAdapter;
 import pl.kot.app1.adapters.WiadomosciArrayAdapter;
-import pl.kot.app1.rest.model.classes.OdpowiedzNaLogowanie;
-import pl.kot.app1.rest.model.classes.Wiadomosc;
-import pl.kot.app1.rest.model.classes.Wydarzenie;
+import pl.kot.app1.model.classes.OdpowiedzNaLogowanie;
+import pl.kot.app1.model.classes.Wiadomosc;
+import pl.kot.app1.model.classes.Wydarzenie;
 
 /**
  * Jest to activity które uruchamia się po udanym logowaniu.

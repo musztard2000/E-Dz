@@ -5,8 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import pl.kot.app1.model.Przedmiot;
-import pl.kot.app1.rest.model.classes.OcenaZPrzedmiotu;
+import pl.kot.app1.model.classes.Przedmiot;
+import pl.kot.app1.model.classes.OcenaZPrzedmiotu;
 
 /**
  * Created by Damian on 20/04/2016.

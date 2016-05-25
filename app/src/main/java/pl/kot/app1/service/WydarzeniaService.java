@@ -5,10 +5,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import pl.kot.app1.rest.model.classes.OcenaZPrzedmiotu;
-import pl.kot.app1.rest.model.classes.OdpowiedzNaLogowanie;
-import pl.kot.app1.rest.model.classes.Wiadomosc;
-import pl.kot.app1.rest.model.classes.Wydarzenie;
+import pl.kot.app1.model.classes.OcenaZPrzedmiotu;
+import pl.kot.app1.model.classes.OdpowiedzNaLogowanie;
+import pl.kot.app1.model.classes.Wiadomosc;
+import pl.kot.app1.model.classes.Wydarzenie;
 
 /**
  * Created by Damian on 21/05/2016.
