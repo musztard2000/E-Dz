@@ -12,9 +12,11 @@ import java.util.Date;
 
 import pl.kot.app1.activities.BusinessActivity;
 import pl.kot.app1.activities.LoginActivity;
+import pl.kot.app1.model.classes.ZapisaneDaneAplikacji;
 import pl.kot.app1.rest.ClientRestowy;
 import pl.kot.app1.model.classes.OdpowiedzNaLogowanie;
 import pl.kot.app1.model.translators.JSONObjectToOdpowiedzNaLogowanieTranslator;
+import pl.kot.app1.service.OdpowiedzNaLogowanieService;
 
 /**
  * Created by Damian on 24/04/2016.
@@ -28,7 +30,7 @@ public class ClientRestowyLogowanie implements ClientRestowy {
     public Context context;
     private String login;
     private String password;
-
+    ZapisaneDaneAplikacji zapisaneDaneAplikacji;
     /**
      * Data w milisekundach w formacie String, którą przekazuje jako jeden z parametrów
      * w query stringu. Jest to data ostatniego logowania (w przypadku pierwszego logowania
@@ -42,11 +44,19 @@ public class ClientRestowyLogowanie implements ClientRestowy {
         this.login = login;
         this.password = password;
 
-        ustalDateOstatniegoLogowania();
+        ustalDateOstatniegoLogowania(0l);
     }
 
-    private void ustalDateOstatniegoLogowania() {
-        final long przykladowaData = 0l;
+    public ClientRestowyLogowanie(Context context, String login, String pass, ZapisaneDaneAplikacji zapisaneDaneAplikacji) {
+        this.context = context;
+        this.login = login;
+        this.password = pass;
+        this.zapisaneDaneAplikacji = zapisaneDaneAplikacji;
+
+        ustalDateOstatniegoLogowania(zapisaneDaneAplikacji.getDataOstatniegoLogowania());
+    }
+
+    private void ustalDateOstatniegoLogowania(long przykladowaData) {
         dataOstatniegoLogowaniaJakoLong = Long.toString(new Date(przykladowaData).getTime());
     }
 
@@ -76,7 +86,9 @@ public class ClientRestowyLogowanie implements ClientRestowy {
             zalogujElementyOdpowiedzi(odpowiedzJSON);
 
             OdpowiedzNaLogowanie odpowiedzNaLogowanie = new JSONObjectToOdpowiedzNaLogowanieTranslator(odpowiedzJSON).generuj();
-            System.out.println(odpowiedzNaLogowanie);
+
+            odpowiedzNaLogowanie = new OdpowiedzNaLogowanieService(odpowiedzNaLogowanie, zapisaneDaneAplikacji).generuj();
+
             intent.putExtra("ODPOWIEDZ_NA_LOGOWANIE", odpowiedzNaLogowanie);
 
         } catch (JSONException e) {

@@ -1,14 +1,21 @@
 package pl.kot.app1.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+
+import java.io.FileOutputStream;
+import java.util.Date;
 
 import pl.kot.app1.R;
 import pl.kot.app1.adapters.OsCzasuArrayAdapter;
@@ -17,6 +24,7 @@ import pl.kot.app1.adapters.WiadomosciArrayAdapter;
 import pl.kot.app1.model.classes.OdpowiedzNaLogowanie;
 import pl.kot.app1.model.classes.Wiadomosc;
 import pl.kot.app1.model.classes.Wydarzenie;
+import pl.kot.app1.model.classes.ZapisaneDaneAplikacji;
 
 /**
  * Jest to activity które uruchamia się po udanym logowaniu.
@@ -27,6 +35,9 @@ import pl.kot.app1.model.classes.Wydarzenie;
  */
 public class BusinessActivity extends Activity{
 
+    private OsCzasuArrayAdapter osCzasuArrayAdapter;
+    private OdpowiedzNaLogowanie odpowiedzNaLogowanie;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +45,12 @@ public class BusinessActivity extends Activity{
 
         final TabHost tabHostOcenIWiadomosci = (TabHost)findViewById(R.id.tabHost);
         tabHostOcenIWiadomosci.setup();
+
+        /*
+        ten obiekt to rezultat udanego zalogowania.
+        Zawiera wszystkie dane do działania aplikacji.
+         */
+        odpowiedzNaLogowanie = (OdpowiedzNaLogowanie) getIntent().getExtras().getSerializable("ODPOWIEDZ_NA_LOGOWANIE");
 
         dodajListenerNawigacjiPomiedzyTabami(tabHostOcenIWiadomosci);
         przygotujTabOsiCzasu(tabHostOcenIWiadomosci);
@@ -77,12 +94,8 @@ public class BusinessActivity extends Activity{
     private void wypelnijListViewOsiCzasu() {
         ListView osCzasuListView = (ListView) findViewById(R.id.listViewTimeline);
 
-        /*
-        ten obiekt to rezultat udanego zalogowania.
-        Zawiera wszystkie dane do działania aplikacji.
-         */
-        final OdpowiedzNaLogowanie odpowiedzNaLogowanie = (OdpowiedzNaLogowanie) getIntent().getExtras().getSerializable("ODPOWIEDZ_NA_LOGOWANIE");
-        osCzasuListView.setAdapter(new OsCzasuArrayAdapter(this, odpowiedzNaLogowanie));
+        osCzasuArrayAdapter = new OsCzasuArrayAdapter(this, odpowiedzNaLogowanie);
+        osCzasuListView.setAdapter(osCzasuArrayAdapter);
         dodajListenerOdznaczaniaNieprzeczytanychWydarzen(osCzasuListView);
     }
 
@@ -109,11 +122,6 @@ public class BusinessActivity extends Activity{
 
     private void wypelnijListViewOceny() {
         ListView przedmiotyListView = (ListView) findViewById(R.id.listViewPrzedmioty);
-        /*
-        ten obiekt to rezultat udanego zalogowania.
-        Zawiera wszystkie dane do działania aplikacji.
-         */
-        final OdpowiedzNaLogowanie odpowiedzNaLogowanie = (OdpowiedzNaLogowanie) getIntent().getExtras().getSerializable("ODPOWIEDZ_NA_LOGOWANIE");
         przedmiotyListView.setAdapter(new PrzedmiotyArrayAdapter(this, odpowiedzNaLogowanie));
     }
 
@@ -128,12 +136,6 @@ public class BusinessActivity extends Activity{
 
     private void wypelnijListViewWiadomosci() {
         ListView wiadomosciListView = (ListView) findViewById(R.id.listViewWiadomosci);
-
-        /*
-        ten obiekt to rezultat udanego zalogowania.
-        Zawiera wszystkie dane do działania aplikacji.
-         */
-        final OdpowiedzNaLogowanie odpowiedzNaLogowanie = (OdpowiedzNaLogowanie) getIntent().getExtras().getSerializable("ODPOWIEDZ_NA_LOGOWANIE");
 
         wiadomosciListView.setAdapter(new WiadomosciArrayAdapter(this, odpowiedzNaLogowanie));
 
@@ -164,4 +166,39 @@ public class BusinessActivity extends Activity{
         startActivity(intent);
     }
 
+    @Override
+    protected void onPause() {
+        writeOne();
+
+        super.onPause();
+    }
+
+    private void writeOne() {
+
+        String filename = "appDataHistory";
+
+        try {
+            FileOutputStream outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
+
+            ZapisaneDaneAplikacji zapisaneDaneAplikacji = utworzZapisaneDaneAplikacji();
+
+            Gson gson = new Gson();
+            String json = gson.toJson(zapisaneDaneAplikacji);
+            System.out.println("GSON: " + json);
+            outputStream.write(json.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @NonNull
+    private ZapisaneDaneAplikacji utworzZapisaneDaneAplikacji() {
+        ZapisaneDaneAplikacji zapisaneDaneAplikacji = new ZapisaneDaneAplikacji();
+        zapisaneDaneAplikacji.setDataOstatniegoLogowania(new Date().getTime());
+        zapisaneDaneAplikacji.setUzytkownik(odpowiedzNaLogowanie.getUzytkownik());
+        zapisaneDaneAplikacji.setWydarzenia(osCzasuArrayAdapter.getWydarzenia());
+        return zapisaneDaneAplikacji;
+    }
 }

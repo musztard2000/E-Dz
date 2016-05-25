@@ -11,6 +11,7 @@ public class Wiadomosc implements Serializable {
     private String temat;
     private String tresc;
     private Date dataWydarzenia;
+    private boolean czyPrzeczytana;
 
     public String getNadawca() {
         return nadawca;
@@ -42,5 +43,13 @@ public class Wiadomosc implements Serializable {
 
     public void setDataWydarzenia(Date dataWydarzenia) {
         this.dataWydarzenia = dataWydarzenia;
+    }
+
+    public boolean isCzyPrzeczytana() {
+        return czyPrzeczytana;
+    }
+
+    public void setCzyPrzeczytana(boolean czyPrzeczytana) {
+        this.czyPrzeczytana = czyPrzeczytana;
     }
 }

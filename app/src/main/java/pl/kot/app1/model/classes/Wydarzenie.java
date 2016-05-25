@@ -31,6 +31,17 @@ public class Wydarzenie implements Serializable{
     Date dataWydarzenia;
 
     /**
+     * Jeśli wydarzenie to wiadomość, wypełniam je nadawcą.
+     */
+    String nadawcaWiadomosci;
+
+    /**
+     * Jeśli wydarzenie to Ocena, wtedy to jest przedmiot,
+     * z którego jest ocena.
+     */
+    private String przedmiotOceny;
+
+    /**
      * Gdy powiadomienie wchodzi do osi czasu po raz pierwszy
      * ustawione ma flagę na 'false', co skutkuje zmienionym
      * kolorem komórki, w której jest. Kliknięcie na to wydarzenie
@@ -91,5 +102,21 @@ public class Wydarzenie implements Serializable{
 
     public void setCzyPrzeczytane(boolean czyPrzeczytane) {
         this.czyPrzeczytane = czyPrzeczytane;
+    }
+
+    public String getNadawcaWiadomosci() {
+        return nadawcaWiadomosci;
+    }
+
+    public void setNadawcaWiadomosci(String nadawcaWiadomosci) {
+        this.nadawcaWiadomosci = nadawcaWiadomosci;
+    }
+
+    public String getPrzedmiotOceny() {
+        return przedmiotOceny;
+    }
+
+    public void setPrzedmiotOceny(String przedmiotOceny) {
+        this.przedmiotOceny = przedmiotOceny;
     }
 }

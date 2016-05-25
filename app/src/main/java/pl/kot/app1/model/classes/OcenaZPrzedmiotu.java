@@ -11,6 +11,7 @@ public class OcenaZPrzedmiotu implements Serializable {
     private String zaCoOcena;
     private String nazwaPrzedmiotu;
     private Date dataWydarzenia;
+    private boolean czyPrzeczytana;
 
     public String getWartoscOceny() {
         return wartoscOceny;
@@ -42,5 +43,13 @@ public class OcenaZPrzedmiotu implements Serializable {
 
     public void setDataWydarzenia(Date dataWydarzenia) {
         this.dataWydarzenia = dataWydarzenia;
+    }
+
+    public boolean isCzyPrzeczytana() {
+        return czyPrzeczytana;
+    }
+
+    public void setCzyPrzeczytana(boolean czyPrzeczytana) {
+        this.czyPrzeczytana = czyPrzeczytana;
     }
 }

@@ -38,6 +38,8 @@ public class WydarzeniaService {
             wydarzenie.setDataWydarzenia(ocenaZPrzedmiotu.getDataWydarzenia());
             wydarzenie.setNazwaWydarzenia(ocenaZPrzedmiotu.getWartoscOceny());
             wydarzenie.setZawartoscWydarzenia(ocenaZPrzedmiotu.getZaCoOcena());
+            wydarzenie.setPrzedmiotOceny(ocenaZPrzedmiotu.getZaCoOcena());
+            wydarzenie.setCzyPrzeczytane(ocenaZPrzedmiotu.isCzyPrzeczytana());
             wydarzenie.setTypWydarzenia("Ocena");
             wydarzeniaZOcen.add(wydarzenie);
         }
@@ -52,6 +54,8 @@ public class WydarzeniaService {
             wydarzenie.setDataWydarzenia(wiadomosc.getDataWydarzenia());
             wydarzenie.setNazwaWydarzenia(wiadomosc.getTemat());
             wydarzenie.setZawartoscWydarzenia(wiadomosc.getTresc());
+            wydarzenie.setCzyPrzeczytane(wiadomosc.isCzyPrzeczytana());
+            wydarzenie.setNadawcaWiadomosci(wiadomosc.getNadawca());
             wydarzenie.setTypWydarzenia("Wiadomość");
             wydarzeniaZOcen.add(wydarzenie);
         }
