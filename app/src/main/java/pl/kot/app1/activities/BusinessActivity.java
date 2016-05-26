@@ -1,7 +1,6 @@
 package pl.kot.app1.activities;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,9 +11,6 @@ import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
-import java.io.FileOutputStream;
 import java.util.Date;
 
 import pl.kot.app1.R;
@@ -25,6 +21,7 @@ import pl.kot.app1.model.classes.OdpowiedzNaLogowanie;
 import pl.kot.app1.model.classes.Wiadomosc;
 import pl.kot.app1.model.classes.Wydarzenie;
 import pl.kot.app1.model.classes.ZapisaneDaneAplikacji;
+import pl.kot.app1.service.LocalStorageProccessor;
 
 /**
  * Jest to activity które uruchamia się po udanym logowaniu.
@@ -37,9 +34,12 @@ public class BusinessActivity extends Activity{
 
     private OsCzasuArrayAdapter osCzasuArrayAdapter;
     private OdpowiedzNaLogowanie odpowiedzNaLogowanie;
+    private Bundle savedInstanceState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("INSIDE ON CREATE.");
+        this.savedInstanceState = savedInstanceState;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.business_layout);
 
@@ -53,6 +53,7 @@ public class BusinessActivity extends Activity{
         odpowiedzNaLogowanie = (OdpowiedzNaLogowanie) getIntent().getExtras().getSerializable("ODPOWIEDZ_NA_LOGOWANIE");
 
         dodajListenerNawigacjiPomiedzyTabami(tabHostOcenIWiadomosci);
+
         przygotujTabOsiCzasu(tabHostOcenIWiadomosci);
         przygotujTabOcen(tabHostOcenIWiadomosci);
         przygotujTabWiadomosci(tabHostOcenIWiadomosci);
@@ -88,6 +89,7 @@ public class BusinessActivity extends Activity{
         tabOsiCzasu.setContent(R.id.tabOsiCzasu);
         tabOsiCzasu.setIndicator("Oś czasu");
         host.addTab(tabOsiCzasu);
+
         wypelnijListViewOsiCzasu();
     }
 
@@ -96,6 +98,7 @@ public class BusinessActivity extends Activity{
 
         osCzasuArrayAdapter = new OsCzasuArrayAdapter(this, odpowiedzNaLogowanie);
         osCzasuListView.setAdapter(osCzasuArrayAdapter);
+
         dodajListenerOdznaczaniaNieprzeczytanychWydarzen(osCzasuListView);
     }
 
@@ -168,29 +171,11 @@ public class BusinessActivity extends Activity{
 
     @Override
     protected void onPause() {
-        writeOne();
-
         super.onPause();
-    }
 
-    private void writeOne() {
+        new LocalStorageProccessor(this).zapiszDoLocalStoragePlik(utworzZapisaneDaneAplikacji());
 
-        String filename = "appDataHistory";
-
-        try {
-            FileOutputStream outputStream = openFileOutput(filename, Context.MODE_PRIVATE);
-
-            ZapisaneDaneAplikacji zapisaneDaneAplikacji = utworzZapisaneDaneAplikacji();
-
-            Gson gson = new Gson();
-            String json = gson.toJson(zapisaneDaneAplikacji);
-            System.out.println("GSON: " + json);
-            outputStream.write(json.getBytes());
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        this.finish();
     }
 
     @NonNull
