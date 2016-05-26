@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.Date;
 
 import pl.kot.app1.R;
-import pl.kot.app1.model.classes.ZapisaneDaneAplikacji;
+import pl.kot.app1.model.classes.ZapisaneDaneUzytkownika;
 import pl.kot.app1.rest.RestProccessor;
 import pl.kot.app1.rest.clients.ClientRestowyLogowanie;
 import pl.kot.app1.service.LocalStorageProccessor;
@@ -26,19 +26,26 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextLogin;
     private EditText editTextPass;
     private TextView textViewBlednyLoginLubHaslo;
-    private ZapisaneDaneAplikacji zapisaneDaneAplikacji;
+    private ZapisaneDaneUzytkownika zapisaneDaneUzytkownika;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_in_layout);
 
-        zapisaneDaneAplikacji = new LocalStorageProccessor(this).pobierzZapisaneDaneAplikacji();
+        zapisaneDaneUzytkownika = new LocalStorageProccessor(this).pobierzZapisaneDaneAplikacji();
 
         inicjujKomponenty();
 
         obsluzLogowanie();
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        zapisaneDaneUzytkownika = new LocalStorageProccessor(this).pobierzZapisaneDaneAplikacji();
     }
 
     private void obsluzLogowanie() {
@@ -85,9 +92,9 @@ public class LoginActivity extends AppCompatActivity {
         final String login = editTextLogin.getText().toString();
         final String pass = editTextPass.getText().toString();
 
-        if(zapisaneDaneAplikacji != null) {
-            System.out.println("ZAPISANE DANE ISTNIEJĄ, DATA OST. LOG: " + new Date(zapisaneDaneAplikacji.getDataOstatniegoLogowania()));
-            new RestProccessor(new ClientRestowyLogowanie(this, login, pass, zapisaneDaneAplikacji)).execute();
+        if(zapisaneDaneUzytkownika != null) {
+            System.out.println("ZAPISANE DANE ISTNIEJĄ, DATA OST. LOG: " + new Date(zapisaneDaneUzytkownika.getDataOstatniegoLogowania()));
+            new RestProccessor(new ClientRestowyLogowanie(this, login, pass, zapisaneDaneUzytkownika)).execute();
         } else {
             System.out.println("NIE ISTNIEJĄ ZAPISANE DANE.");
             new RestProccessor(new ClientRestowyLogowanie(this, login, pass)).execute();

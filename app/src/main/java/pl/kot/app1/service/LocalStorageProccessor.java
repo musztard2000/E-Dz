@@ -11,7 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 
-import pl.kot.app1.model.classes.ZapisaneDaneAplikacji;
+import pl.kot.app1.model.classes.ZapisaneDaneUzytkownika;
 
 /**
  * Created by Damian on 26/05/2016.
@@ -24,7 +24,7 @@ public class LocalStorageProccessor {
         this.context = context;
     }
 
-    public void zapiszDoLocalStoragePlik(ZapisaneDaneAplikacji zapisaneDaneAplikacji) {
+    public void zapiszDoLocalStoragePlik(ZapisaneDaneUzytkownika zapisaneDaneUzytkownika) {
     Log.d("INSIDE METHOD", "zapiszDoLOcalStoragePlik.");
 
         try {
@@ -32,7 +32,7 @@ public class LocalStorageProccessor {
                     context.openFileOutput(LOCAL_STORAGE_FILE_NAME, Context.MODE_PRIVATE);
 
             Gson gson = new Gson();
-            String json = gson.toJson(zapisaneDaneAplikacji);
+            String json = gson.toJson(zapisaneDaneUzytkownika);
             System.out.println("GSON: " + json);
             outputStream.write(json.getBytes());
             outputStream.close();
@@ -42,10 +42,10 @@ public class LocalStorageProccessor {
 
     }
 
-    public ZapisaneDaneAplikacji pobierzZapisaneDaneAplikacji() {
+    public ZapisaneDaneUzytkownika pobierzZapisaneDaneAplikacji() {
         Log.d("INSIDE METHOD", "pobierzZapisaneDaneAplikacji.");
 
-        ZapisaneDaneAplikacji zapisaneDaneAplikacji;
+        ZapisaneDaneUzytkownika zapisaneDaneUzytkownika;
         try {
             FileInputStream inputStream = context.openFileInput(LOCAL_STORAGE_FILE_NAME);
 
@@ -61,9 +61,9 @@ public class LocalStorageProccessor {
             Log.d("PLIK ", "ZAWARTOSC HISTORII APLIKACJI: " + total);
 
             Gson gson = new Gson();
-            zapisaneDaneAplikacji = gson.fromJson(total.toString(), ZapisaneDaneAplikacji.class);
+            zapisaneDaneUzytkownika = gson.fromJson(total.toString(), ZapisaneDaneUzytkownika.class);
 
-            return zapisaneDaneAplikacji;
+            return zapisaneDaneUzytkownika;
         } catch (FileNotFoundException e) {
             Log.e("FILE_NOT_FOUND", "NIE ISTNIEJE PLIK HISTORII APLIKACJI.");
         } catch (Exception e) {

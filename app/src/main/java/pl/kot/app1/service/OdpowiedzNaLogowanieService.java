@@ -7,7 +7,7 @@ import pl.kot.app1.model.classes.OcenaZPrzedmiotu;
 import pl.kot.app1.model.classes.OdpowiedzNaLogowanie;
 import pl.kot.app1.model.classes.Wiadomosc;
 import pl.kot.app1.model.classes.Wydarzenie;
-import pl.kot.app1.model.classes.ZapisaneDaneAplikacji;
+import pl.kot.app1.model.classes.ZapisaneDaneUzytkownika;
 
 /**
  * Created by Damian on 25/05/2016.
@@ -15,15 +15,15 @@ import pl.kot.app1.model.classes.ZapisaneDaneAplikacji;
 public class OdpowiedzNaLogowanieService {
 
     private OdpowiedzNaLogowanie odpowiedzNaLogowanie;
-    private ZapisaneDaneAplikacji zapisaneDaneAplikacji;
+    private ZapisaneDaneUzytkownika zapisaneDaneUzytkownika;
 
-    public OdpowiedzNaLogowanieService(OdpowiedzNaLogowanie odpowiedzNaLogowanie, ZapisaneDaneAplikacji zapisaneDaneAplikacji) {
+    public OdpowiedzNaLogowanieService(OdpowiedzNaLogowanie odpowiedzNaLogowanie, ZapisaneDaneUzytkownika zapisaneDaneUzytkownika) {
         this.odpowiedzNaLogowanie = odpowiedzNaLogowanie;
-        this.zapisaneDaneAplikacji = zapisaneDaneAplikacji;
+        this.zapisaneDaneUzytkownika = zapisaneDaneUzytkownika;
     }
 
     public OdpowiedzNaLogowanie generuj() {
-        if (zapisaneDaneAplikacji == null) {
+        if (zapisaneDaneUzytkownika == null) {
             return odpowiedzNaLogowanie;
         } else {
             return transformujIScalDaneAplikacjiZOdpowiedziaNaLogowanie();
@@ -33,7 +33,7 @@ public class OdpowiedzNaLogowanieService {
     private OdpowiedzNaLogowanie transformujIScalDaneAplikacjiZOdpowiedziaNaLogowanie() {
         List<OcenaZPrzedmiotu> oceny = new ArrayList<>();
         List<Wiadomosc> wiadomosci = new ArrayList<>();
-        for(Wydarzenie wydarzenie : zapisaneDaneAplikacji.getWydarzenia()) {
+        for(Wydarzenie wydarzenie : zapisaneDaneUzytkownika.getWydarzenia()) {
             if (wydarzenie.getTypWydarzenia().startsWith("O")) {
                 oceny.add(transformujWydazrenieDoOceny(wydarzenie));
             } else {
@@ -41,7 +41,7 @@ public class OdpowiedzNaLogowanieService {
             }
         }
 
-        odpowiedzNaLogowanie.setUzytkownik(zapisaneDaneAplikacji.getUzytkownik());
+        odpowiedzNaLogowanie.setUzytkownik(zapisaneDaneUzytkownika.getUzytkownik());
         odpowiedzNaLogowanie.getWiadomosci().addAll(wiadomosci);
         odpowiedzNaLogowanie.getOceny().addAll(oceny);
 

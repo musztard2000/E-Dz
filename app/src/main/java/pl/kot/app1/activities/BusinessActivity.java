@@ -20,7 +20,7 @@ import pl.kot.app1.adapters.WiadomosciArrayAdapter;
 import pl.kot.app1.model.classes.OdpowiedzNaLogowanie;
 import pl.kot.app1.model.classes.Wiadomosc;
 import pl.kot.app1.model.classes.Wydarzenie;
-import pl.kot.app1.model.classes.ZapisaneDaneAplikacji;
+import pl.kot.app1.model.classes.ZapisaneDaneUzytkownika;
 import pl.kot.app1.service.LocalStorageProccessor;
 
 /**
@@ -179,11 +179,11 @@ public class BusinessActivity extends Activity{
     }
 
     @NonNull
-    private ZapisaneDaneAplikacji utworzZapisaneDaneAplikacji() {
-        ZapisaneDaneAplikacji zapisaneDaneAplikacji = new ZapisaneDaneAplikacji();
-        zapisaneDaneAplikacji.setDataOstatniegoLogowania(new Date().getTime());
-        zapisaneDaneAplikacji.setUzytkownik(odpowiedzNaLogowanie.getUzytkownik());
-        zapisaneDaneAplikacji.setWydarzenia(osCzasuArrayAdapter.getWydarzenia());
-        return zapisaneDaneAplikacji;
+    private ZapisaneDaneUzytkownika utworzZapisaneDaneAplikacji() {
+        ZapisaneDaneUzytkownika zapisaneDaneUzytkownika = new ZapisaneDaneUzytkownika();
+        zapisaneDaneUzytkownika.setDataOstatniegoLogowania(new Date().getTime());
+        zapisaneDaneUzytkownika.setUzytkownik(odpowiedzNaLogowanie.getUzytkownik());
+        zapisaneDaneUzytkownika.setWydarzenia(osCzasuArrayAdapter.getWydarzenia());
+        return zapisaneDaneUzytkownika;
     }
 }

@@ -7,14 +7,14 @@ import java.util.List;
  *
  * Model danych przechowywanych jako plik tekstowy w local storage aplikacji.
  */
-public class ZapisaneDaneAplikacji {
+public class ZapisaneDaneUzytkownika {
     private Uzytkownik uzytkownik;
     private List<Wydarzenie> wydarzenia;
     private long dataOstatniegoLogowania;
 
-    public ZapisaneDaneAplikacji() {}
+    public ZapisaneDaneUzytkownika() {}
 
-    public ZapisaneDaneAplikacji(Uzytkownik uzytkownik, List<Wydarzenie> wydarzenia, long dataOstatniegoLogowania) {
+    public ZapisaneDaneUzytkownika(Uzytkownik uzytkownik, List<Wydarzenie> wydarzenia, long dataOstatniegoLogowania) {
         this.uzytkownik = uzytkownik;
         this.wydarzenia = wydarzenia;
         this.dataOstatniegoLogowania = dataOstatniegoLogowania;
