@@ -9,9 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.Date;
-
 import pl.kot.app1.R;
+import pl.kot.app1.model.classes.ZapisaneDaneAplikacji;
 import pl.kot.app1.model.classes.ZapisaneDaneUzytkownika;
 import pl.kot.app1.rest.RestProccessor;
 import pl.kot.app1.rest.clients.ClientRestowyLogowanie;
@@ -26,14 +25,14 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextLogin;
     private EditText editTextPass;
     private TextView textViewBlednyLoginLubHaslo;
-    private ZapisaneDaneUzytkownika zapisaneDaneUzytkownika;
+    private ZapisaneDaneAplikacji zapisaneDaneAplikacji;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_in_layout);
 
-        zapisaneDaneUzytkownika = new LocalStorageProccessor(this).pobierzZapisaneDaneAplikacji();
+        zapisaneDaneAplikacji = new LocalStorageProccessor(this).pobierzZapisaneDaneAplikacji();
 
         inicjujKomponenty();
 
@@ -45,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        zapisaneDaneUzytkownika = new LocalStorageProccessor(this).pobierzZapisaneDaneAplikacji();
+        zapisaneDaneAplikacji = new LocalStorageProccessor(this).pobierzZapisaneDaneAplikacji();
     }
 
     private void obsluzLogowanie() {
@@ -89,17 +88,39 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void zalogujPrzezREST() {
-        final String login = editTextLogin.getText().toString();
-        final String pass = editTextPass.getText().toString();
+        final String wprowadzonyLogin = editTextLogin.getText().toString();
+        final String wprowadzoneHaslo = editTextPass.getText().toString();
 
-        if(zapisaneDaneUzytkownika != null) {
-            System.out.println("ZAPISANE DANE ISTNIEJĄ, DATA OST. LOG: " + new Date(zapisaneDaneUzytkownika.getDataOstatniegoLogowania()));
-            new RestProccessor(new ClientRestowyLogowanie(this, login, pass, zapisaneDaneUzytkownika)).execute();
+
+        if (zapisaneDaneAplikacji == null) {
+            zalogujIUtworzLocalStorage(wprowadzonyLogin, wprowadzoneHaslo);
         } else {
-            System.out.println("NIE ISTNIEJĄ ZAPISANE DANE.");
-            new RestProccessor(new ClientRestowyLogowanie(this, login, pass)).execute();
+            zalogujZIstniejacymPlikiemLocalStorage(wprowadzonyLogin, wprowadzoneHaslo);
+        }
+    }
+
+    private void zalogujIUtworzLocalStorage(String wprowadzonyLogin, String wprowadzoneHaslo) {
+        System.out.println("NIE ISTNIEJĄ ZAPISANE DANE.");
+
+        new RestProccessor(new ClientRestowyLogowanie(this, wprowadzonyLogin, wprowadzoneHaslo)).execute();
+    }
+
+    private void zalogujZIstniejacymPlikiemLocalStorage(String wprowadzonyLogin, String wprowadzoneHaslo) {
+        boolean czyTrzebaDodacNowegoUzytkownika = true;
+
+        for (ZapisaneDaneUzytkownika zapisaneDaneUzytkownika : zapisaneDaneAplikacji.getZapisaneDaneUzytkownikaList()) {
+            if (zapisaneDaneUzytkownika.getUzytkownik().getLogin().equals(wprowadzonyLogin)
+                    && zapisaneDaneUzytkownika.getUzytkownik().getPassword().equals(wprowadzoneHaslo)) {
+
+                new RestProccessor(new ClientRestowyLogowanie(this, wprowadzonyLogin, wprowadzoneHaslo, zapisaneDaneAplikacji, zapisaneDaneUzytkownika)).execute();
+                czyTrzebaDodacNowegoUzytkownika = false;
+            }
         }
 
+        if (czyTrzebaDodacNowegoUzytkownika) {
+            System.out.println("dodaje nowego uzytkownika: " + wprowadzonyLogin);
+            new RestProccessor(new ClientRestowyLogowanie(this, wprowadzonyLogin, wprowadzoneHaslo, zapisaneDaneAplikacji)).execute();
+        }
     }
 
     public EditText getEditTextLogin() {

@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import pl.kot.app1.R;
@@ -20,6 +22,7 @@ import pl.kot.app1.adapters.WiadomosciArrayAdapter;
 import pl.kot.app1.model.classes.OdpowiedzNaLogowanie;
 import pl.kot.app1.model.classes.Wiadomosc;
 import pl.kot.app1.model.classes.Wydarzenie;
+import pl.kot.app1.model.classes.ZapisaneDaneAplikacji;
 import pl.kot.app1.model.classes.ZapisaneDaneUzytkownika;
 import pl.kot.app1.service.LocalStorageProccessor;
 
@@ -174,12 +177,61 @@ public class BusinessActivity extends Activity{
         super.onPause();
 
         new LocalStorageProccessor(this).zapiszDoLocalStoragePlik(utworzZapisaneDaneAplikacji());
+    }
 
-        this.finish();
+    private ZapisaneDaneAplikacji utworzZapisaneDaneAplikacji() {
+        utworzDaneAktualnegoUzytkownikaDoZapisania();
+
+        ZapisaneDaneAplikacji zapisaneDaneAplikacji = (ZapisaneDaneAplikacji) getIntent().getExtras().getSerializable("ZAPISANE_DANE_APLIKACJI");
+
+        if (zapisaneDaneAplikacji == null) {
+            return utworzNowyPlikZapisaneDaneAplikacji();
+        } else {
+            return zwrocZaktualizowaneZapisaneDaneAplikacji();
+        }
+    }
+
+    private ZapisaneDaneAplikacji zwrocZaktualizowaneZapisaneDaneAplikacji() {
+        ZapisaneDaneAplikacji zapisaneIstniejaceDaneAplikacji = (ZapisaneDaneAplikacji) getIntent().getExtras().getSerializable("ZAPISANE_DANE_APLIKACJI");
+
+        final ZapisaneDaneUzytkownika daneUzytkownikaDoZapisaniaLubAktualizacji = utworzDaneAktualnegoUzytkownikaDoZapisania();
+
+        return dodajLubAktualizujZapisaneDaneAplikacji(zapisaneIstniejaceDaneAplikacji, daneUzytkownikaDoZapisaniaLubAktualizacji);
+    }
+
+    private ZapisaneDaneAplikacji dodajLubAktualizujZapisaneDaneAplikacji(ZapisaneDaneAplikacji zapisaneIstniejaceDaneAplikacji, ZapisaneDaneUzytkownika daneUzytkownikaDoZapisaniaLubAktualizacji) {
+
+        int indeksUzytkownikaDoZamienienia = -1;
+        for (ZapisaneDaneUzytkownika uzytkownik : zapisaneIstniejaceDaneAplikacji.getZapisaneDaneUzytkownikaList()) {
+            if (uzytkownik.getUzytkownik().getLogin().equals(daneUzytkownikaDoZapisaniaLubAktualizacji.getUzytkownik().getLogin())) {
+                indeksUzytkownikaDoZamienienia = zapisaneIstniejaceDaneAplikacji.getZapisaneDaneUzytkownikaList().indexOf(uzytkownik);
+            }
+        }
+
+        if (indeksUzytkownikaDoZamienienia != -1) {
+            Log.e("ZAPISANE_DANE", "AKTUALIZUJE  uzytkownika: " + daneUzytkownikaDoZapisaniaLubAktualizacji.getUzytkownik().getLogin());
+            zapisaneIstniejaceDaneAplikacji.getZapisaneDaneUzytkownikaList().set(indeksUzytkownikaDoZamienienia, daneUzytkownikaDoZapisaniaLubAktualizacji);
+        } else {
+            Log.e("ZAPISANE_DANE", "DODAJE UZYTKOWNIKA uzytkownika: " + daneUzytkownikaDoZapisaniaLubAktualizacji.getUzytkownik().getLogin());
+            zapisaneIstniejaceDaneAplikacji.getZapisaneDaneUzytkownikaList().add(daneUzytkownikaDoZapisaniaLubAktualizacji);
+        }
+
+        return zapisaneIstniejaceDaneAplikacji;
     }
 
     @NonNull
-    private ZapisaneDaneUzytkownika utworzZapisaneDaneAplikacji() {
+    private ZapisaneDaneAplikacji utworzNowyPlikZapisaneDaneAplikacji() {
+        final ZapisaneDaneUzytkownika daneUzytkownikaDoZapisania = utworzDaneAktualnegoUzytkownikaDoZapisania();
+
+        ZapisaneDaneAplikacji zapisaneDaneAplikacji;
+        zapisaneDaneAplikacji = new ZapisaneDaneAplikacji();
+        zapisaneDaneAplikacji.setZapisaneDaneUzytkownikaList(new ArrayList<ZapisaneDaneUzytkownika>());
+        zapisaneDaneAplikacji.getZapisaneDaneUzytkownikaList().add(daneUzytkownikaDoZapisania);
+        Log.e("ZAPISANE_DANE", "Utworzylem nowe zapisane dane aplikacji z uzytkownikiem: " + daneUzytkownikaDoZapisania.getUzytkownik().getLogin());
+        return zapisaneDaneAplikacji;
+    }
+
+    private ZapisaneDaneUzytkownika utworzDaneAktualnegoUzytkownikaDoZapisania() {
         ZapisaneDaneUzytkownika zapisaneDaneUzytkownika = new ZapisaneDaneUzytkownika();
         zapisaneDaneUzytkownika.setDataOstatniegoLogowania(new Date().getTime());
         zapisaneDaneUzytkownika.setUzytkownik(odpowiedzNaLogowanie.getUzytkownik());

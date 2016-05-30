@@ -1,5 +1,6 @@
 package pl.kot.app1.model.classes;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  *
  * Model danych przechowywanych jako plik tekstowy w local storage aplikacji.
  */
-public class ZapisaneDaneUzytkownika {
+public class ZapisaneDaneUzytkownika implements Serializable{
     private Uzytkownik uzytkownik;
     private List<Wydarzenie> wydarzenia;
     private long dataOstatniegoLogowania;

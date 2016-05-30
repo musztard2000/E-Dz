@@ -12,6 +12,7 @@ import java.util.Date;
 
 import pl.kot.app1.activities.BusinessActivity;
 import pl.kot.app1.activities.LoginActivity;
+import pl.kot.app1.model.classes.ZapisaneDaneAplikacji;
 import pl.kot.app1.model.classes.ZapisaneDaneUzytkownika;
 import pl.kot.app1.rest.ClientRestowy;
 import pl.kot.app1.model.classes.OdpowiedzNaLogowanie;
@@ -39,6 +40,17 @@ public class ClientRestowyLogowanie implements ClientRestowy {
      */
     private String dataOstatniegoLogowaniaJakoLong;
 
+    /**
+     * Plik z zapisanymi danymi aplikacji.
+     */
+    private ZapisaneDaneAplikacji zapisaneDaneAplikacji;
+
+    /**
+     * Konstruktor wykorzystywany w przypadku gdy nie istnieje plik z local storage.
+     * @param context - kontekst
+     * @param login - login
+     * @param password - hasło
+     */
     public ClientRestowyLogowanie(Context context, String login, String password) {
         this.context = context;
         this.login = login;
@@ -47,13 +59,40 @@ public class ClientRestowyLogowanie implements ClientRestowy {
         ustalDateOstatniegoLogowania(0l);
     }
 
-    public ClientRestowyLogowanie(Context context, String login, String pass, ZapisaneDaneUzytkownika zapisaneDaneUzytkownika) {
+    /**
+     * Ten konstruktor klienta wywołuje sie, gdy w local storage aplikacji
+     * znajduje się użytkownik zgodny z parametrami logowania aplikacji.
+     * @param context - kontekst
+     * @param login - login
+     * @param pass - hasło
+     * @param zapisaneDaneUzytkownika - zapisane dane użytkownika,
+     *                                znajdujące się już w local storage aplikacji.
+     */
+    public ClientRestowyLogowanie(Context context, String login, String pass, ZapisaneDaneAplikacji zapisaneDaneAplikacji, ZapisaneDaneUzytkownika zapisaneDaneUzytkownika) {
         this.context = context;
         this.login = login;
         this.password = pass;
         this.zapisaneDaneUzytkownika = zapisaneDaneUzytkownika;
+        this.zapisaneDaneAplikacji = zapisaneDaneAplikacji;
 
         ustalDateOstatniegoLogowania(zapisaneDaneUzytkownika.getDataOstatniegoLogowania());
+    }
+
+    /**
+     *Ten konstruktor klienta wywołuje się w przypadku gdy istnieje już plik local storage
+     * aplikacji, ale w tym pliku nie znajduje się użytkownik o podanych parametrach logowania.
+     * @param context - kontekst
+     * @param login - login
+     * @param pass - hasło
+     * @param zapisaneDaneAplikacji - zapisane dane aplikacji.
+     */
+    public ClientRestowyLogowanie(LoginActivity context, String login, String pass, ZapisaneDaneAplikacji zapisaneDaneAplikacji) {
+        this.context = context;
+        this.login = login;
+        this.password = pass;
+        this.zapisaneDaneAplikacji = zapisaneDaneAplikacji;
+
+        ustalDateOstatniegoLogowania(0l);
     }
 
     private void ustalDateOstatniegoLogowania(long przykladowaData) {
@@ -82,17 +121,25 @@ public class ClientRestowyLogowanie implements ClientRestowy {
         System.out.println("INPUT TEXT OF CLIENT RESTOWY LOGOWANIE: " + inputText);
         try {
             JSONObject odpowiedzJSON = new JSONObject(inputText);
-
             zalogujElementyOdpowiedzi(odpowiedzJSON);
 
             OdpowiedzNaLogowanie odpowiedzNaLogowanie = new JSONObjectToOdpowiedzNaLogowanieTranslator(odpowiedzJSON).generuj();
-
             odpowiedzNaLogowanie = new OdpowiedzNaLogowanieService(odpowiedzNaLogowanie, zapisaneDaneUzytkownika).generuj();
-
             intent.putExtra("ODPOWIEDZ_NA_LOGOWANIE", odpowiedzNaLogowanie);
+
+            zalogujCzyIstniejaDaneAplikacjiWLocalStorage();
+            intent.putExtra("ZAPISANE_DANE_APLIKACJI", zapisaneDaneAplikacji);
 
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void zalogujCzyIstniejaDaneAplikacjiWLocalStorage() {
+        if (zapisaneDaneAplikacji == null) {
+            Log.e("CLIENT RESTOWY- dane", "Zapisane dane to null");
+        } else {
+            Log.e("CLIENT RESTOWY- dane", "Zapisane dane to <NIE> null");
         }
     }
 
