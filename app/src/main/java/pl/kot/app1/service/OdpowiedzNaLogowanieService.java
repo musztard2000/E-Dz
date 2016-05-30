@@ -22,12 +22,23 @@ public class OdpowiedzNaLogowanieService {
         this.zapisaneDaneUzytkownika = zapisaneDaneUzytkownika;
     }
 
+    public OdpowiedzNaLogowanieService(ZapisaneDaneUzytkownika zapisaneDaneUzytkownika) {
+        this.zapisaneDaneUzytkownika = zapisaneDaneUzytkownika;
+    }
+
     public OdpowiedzNaLogowanie generuj() {
         if (zapisaneDaneUzytkownika == null) {
             return odpowiedzNaLogowanie;
         } else {
             return transformujIScalDaneAplikacjiZOdpowiedziaNaLogowanie();
         }
+    }
+
+    public OdpowiedzNaLogowanie generujOdpowiedzOffline() {
+        odpowiedzNaLogowanie = new OdpowiedzNaLogowanie();
+        odpowiedzNaLogowanie.setWiadomosci(new ArrayList<Wiadomosc>());
+        odpowiedzNaLogowanie.setOceny(new ArrayList<OcenaZPrzedmiotu>());
+        return transformujIScalDaneAplikacjiZOdpowiedziaNaLogowanie();
     }
 
     private OdpowiedzNaLogowanie transformujIScalDaneAplikacjiZOdpowiedziaNaLogowanie() {
