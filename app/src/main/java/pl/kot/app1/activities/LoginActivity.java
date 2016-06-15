@@ -118,25 +118,6 @@ public class LoginActivity extends AppCompatActivity {
         textViewBlednyLoginLubHaslo = (TextView) findViewById(R.id.textViewBlednyLoginLubHaaslo);
     }
 
-    public void zalogujMOCKOWO() {
-        final String login = editTextLogin.getText().toString();
-        final String pass = editTextPass.getText().toString();
-
-        if (zamokujUdaneLogowanie(login, pass)) {
-            textViewBlednyLoginLubHaslo.setText(null);
-            editTextLogin.setText(null);
-            editTextPass.setText(null);
-            Intent intent = new Intent(this, BusinessActivity.class);
-            startActivity(intent);
-        } else {
-            textViewBlednyLoginLubHaslo.setText("Logowanie nieudane. Błędny login lub hasło.");
-        }
-    }
-
-    private boolean zamokujUdaneLogowanie(String login, String password) {
-        return ("dam".equals(login) && "kot".equals(password));
-    }
-
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

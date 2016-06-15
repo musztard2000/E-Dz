@@ -38,7 +38,7 @@ public class ClientRestowyLogowanie implements ClientRestowy {
      * będzie wynosiła 0), będzie ona konieczna przy wykonywaniu przez aplikację na serwerze
      * zapytań o wydarzenia, które wydarzyły się pomiędzy ostatnim logowaniem, a datą aktualną.
      */
-    private String dataOstatniegoLogowaniaJakoLong;
+    private String dataOstatniegoLogowaniaJakoString;
 
     /**
      * Plik z zapisanymi danymi aplikacji.
@@ -96,12 +96,12 @@ public class ClientRestowyLogowanie implements ClientRestowy {
     }
 
     private void ustalDateOstatniegoLogowania(long przykladowaData) {
-        dataOstatniegoLogowaniaJakoLong = Long.toString(new Date(przykladowaData).getTime());
+        dataOstatniegoLogowaniaJakoString = Long.toString(new Date(przykladowaData).getTime());
     }
 
     @Override
     public String getRestResourceURL() {
-        return URL_LOGOWANIE + "/?login=" + login + "&haslo=" + password + "&dataOstLog=" + dataOstatniegoLogowaniaJakoLong;
+        return URL_LOGOWANIE + "/?login=" + login + "&haslo=" + password + "&dataOstLog=" + dataOstatniegoLogowaniaJakoString;
     }
 
     @Override

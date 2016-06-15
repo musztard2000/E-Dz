@@ -15,12 +15,6 @@ public class ZapisaneDaneUzytkownika implements Serializable{
 
     public ZapisaneDaneUzytkownika() {}
 
-    public ZapisaneDaneUzytkownika(Uzytkownik uzytkownik, List<Wydarzenie> wydarzenia, long dataOstatniegoLogowania) {
-        this.uzytkownik = uzytkownik;
-        this.wydarzenia = wydarzenia;
-        this.dataOstatniegoLogowania = dataOstatniegoLogowania;
-    }
-
     public Uzytkownik getUzytkownik() {
         return uzytkownik;
     }
