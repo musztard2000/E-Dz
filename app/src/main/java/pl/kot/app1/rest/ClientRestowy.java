@@ -13,8 +13,7 @@ package pl.kot.app1.rest;
 public interface ClientRestowy {
     String URL_UCZNIOWIE = "http://192.168.0.11:8080/webservices/webapi/uczniowie";
     String URL_OPIEKUN = "http://192.168.0.11:8080/webservices/webapi/uczniowie/opiekun";
-    String URL_LOGOWANIE = "http://192.168.0.11:8080/webservices/webapi/dziennik/logowanie";
-
+    String URL_LOGOWANIE = "http://kotedziennik.northeurope.cloudapp.azure.com:8080/webservices/app/dziennik/logowanie";
     /**
      *
      * @return - Zwraca jedną ze stałych zadeklarowanych w interfejsie, które

@@ -4,12 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import pl.kot.app1.model.classes.OcenaZPrzedmiotu;
 import pl.kot.app1.model.classes.OdpowiedzNaLogowanie;
@@ -107,15 +104,7 @@ public class JSONObjectToOdpowiedzNaLogowanieTranslator {
      * @return - Zwraca obiekt java.util.Date przetworzony odpowiednim patternem.
      */
     private Date tlumaczStringDoDaty(String date) {
-        final String DEFULAT_JAVA_UTIL_DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ss.SSS";
-        final SimpleDateFormat sdf = new SimpleDateFormat(DEFULAT_JAVA_UTIL_DATE_PATTERN, Locale.ENGLISH);
-        try {
-            return sdf.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return new Date(Long.valueOf(date));
     }
-
 
 }
