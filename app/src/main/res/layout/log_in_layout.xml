@@ -30,6 +30,7 @@
             android:maxWidth="300dp"
             android:layout_below="@+id/zalogujTextView"
             android:layout_centerHorizontal="true"
+            android:singleLine="true"
             android:maxLines="1" />
 
         <EditText
@@ -40,7 +41,7 @@
             android:minWidth="300dp"
             android:maxWidth="300dp"
             android:nestedScrollingEnabled="false"
-            android:password="false"
+            android:singleLine="true"
             android:maxLines="1"
             android:layout_below="@+id/textEditLogin"
             android:layout_alignStart="@+id/textEditLogin"
